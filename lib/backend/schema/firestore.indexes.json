@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "route_data",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "driver",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "eta",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
