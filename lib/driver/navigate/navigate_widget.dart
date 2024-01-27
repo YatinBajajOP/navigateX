@@ -52,6 +52,7 @@ class _NavigateWidgetState extends State<NavigateWidget> {
       );
     }
 
+    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,

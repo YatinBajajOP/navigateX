@@ -12,9 +12,23 @@ import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-DateTime? getShiftTime(List<DateTime>? shifts) {
+DateTime? getShiftTime(List<RouteDataRecord>? routeDocs) {
+  List<DateTime> shifts = [];
+
+  if (routeDocs != null) {
+    for (var document in routeDocs) {
+      // Assuming "shift" is the field you want to extract
+      var shift = document.shift;
+
+      // Check if the field is not null before adding to the list
+      if (shift != null) {
+        shifts.add(shift);
+      }
+    }
+  }
+
   // From shifts get list of sorted, unique DateTimes then return DateTime greater than current datetime
-  if (shifts == null || shifts.isEmpty) {
+  if (shifts.isEmpty) {
     return null;
   }
 
@@ -25,6 +39,7 @@ DateTime? getShiftTime(List<DateTime>? shifts) {
   final now = DateTime.now();
   for (final dateTime in sortedUniqueDateTimes) {
     if (dateTime.isAfter(now)) {
+      // DateTime shiftedDateTime = dateTime.add(Duration(minutes: 1));
       return dateTime;
     }
   }

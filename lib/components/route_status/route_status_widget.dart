@@ -47,10 +47,12 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).alternate,
+        color: FlutterFlowTheme.of(context).tertiary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -77,12 +79,14 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                   }(),
                 );
                 Navigator.pop(context);
+
+                context.pushNamed('feedback');
               },
               child: Text(
-                'Pick Up ',
+                'Picked Up ',
                 style: FlutterFlowTheme.of(context).labelLarge.override(
                       fontFamily: 'Rubik',
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).primaryBackground,
                       fontSize: 24.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -93,7 +97,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             width: 300.0,
             child: Divider(
               thickness: 1.0,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: FlutterFlowTheme.of(context).primaryBackground,
             ),
           ),
           InkWell(
@@ -115,7 +119,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               'No Show',
               style: FlutterFlowTheme.of(context).labelLarge.override(
                     fontFamily: 'Rubik',
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     fontSize: 24.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -125,7 +129,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             width: 300.0,
             child: Divider(
               thickness: 1.0,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: FlutterFlowTheme.of(context).primaryBackground,
             ),
           ),
           InkWell(
@@ -147,7 +151,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               'Late',
               style: FlutterFlowTheme.of(context).labelLarge.override(
                     fontFamily: 'Rubik',
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     fontSize: 24.0,
                     fontWeight: FontWeight.w500,
                   ),
