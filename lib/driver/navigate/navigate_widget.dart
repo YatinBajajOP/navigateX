@@ -13,10 +13,10 @@ import 'navigate_model.dart';
 export 'navigate_model.dart';
 
 class NavigateWidget extends StatefulWidget {
-  const NavigateWidget({Key? key}) : super(key: key);
+  const NavigateWidget({super.key});
 
   @override
-  _NavigateWidgetState createState() => _NavigateWidgetState();
+  State<NavigateWidget> createState() => _NavigateWidgetState();
 }
 
 class _NavigateWidgetState extends State<NavigateWidget> {
@@ -52,6 +52,7 @@ class _NavigateWidgetState extends State<NavigateWidget> {
       );
     }
 
+    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,

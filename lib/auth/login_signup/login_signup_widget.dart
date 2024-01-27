@@ -12,10 +12,10 @@ import 'login_signup_model.dart';
 export 'login_signup_model.dart';
 
 class LoginSignupWidget extends StatefulWidget {
-  const LoginSignupWidget({Key? key}) : super(key: key);
+  const LoginSignupWidget({super.key});
 
   @override
-  _LoginSignupWidgetState createState() => _LoginSignupWidgetState();
+  State<LoginSignupWidget> createState() => _LoginSignupWidgetState();
 }
 
 class _LoginSignupWidgetState extends State<LoginSignupWidget>
@@ -70,6 +70,8 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -216,7 +218,8 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               BorderRadius.circular(8.0),
                                         ),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .alternate,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20.0, 24.0, 20.0, 24.0),
@@ -225,9 +228,11 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rubik',
-                                            color: Color(0xFF0F1113),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                           ),
                                       maxLines: null,
+                                      keyboardType: TextInputType.emailAddress,
                                       validator: _model
                                           .emailAddressControllerValidator
                                           .asValidator(context),
@@ -281,7 +286,8 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               BorderRadius.circular(8.0),
                                         ),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .alternate,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20.0, 24.0, 20.0, 24.0),
@@ -306,7 +312,8 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rubik',
-                                            color: Color(0xFF0F1113),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                           ),
                                       validator: _model
                                           .passwordControllerValidator
@@ -335,7 +342,8 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                       },
                                       text: 'Sign In',
                                       options: FFButtonOptions(
-                                        padding: EdgeInsets.all(22.0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            22.0, 22.0, 22.0, 22.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -348,15 +356,16 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBtnText,
-                                              fontSize: 20.0,
+                                              fontSize: 16.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                        elevation: 3.0,
+                                        elevation: 2.0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
                                       ),
+                                      showLoadingIndicator: false,
                                     ),
                                   ),
                                   Padding(
@@ -594,7 +603,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
@@ -603,7 +614,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Rubik',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         maxLines: null,
                                         validator: _model
@@ -663,7 +676,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
@@ -672,7 +687,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Rubik',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         maxLines: null,
                                         validator: _model
@@ -733,7 +750,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
@@ -762,7 +781,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Rubik',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         validator: _model
                                             .passwordCreateControllerValidator
@@ -822,7 +843,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
@@ -851,7 +874,9 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Rubik',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         validator: _model
                                             .rpasswordCreateControllerValidator
@@ -904,7 +929,7 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                                   fontFamily: 'Rubik',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryBackground,
+                                                      .primaryText,
                                                   fontSize: 16.0,
                                                 ),
                                           ),
@@ -957,7 +982,7 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                       },
                                       text: 'Create Account',
                                       options: FFButtonOptions(
-                                        padding: EdgeInsets.all(20.0),
+                                        padding: EdgeInsets.all(16.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -970,15 +995,16 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBtnText,
-                                              fontSize: 20.0,
+                                              fontSize: 16.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                        elevation: 3.0,
+                                        elevation: 2.0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
                                       ),
+                                      showLoadingIndicator: false,
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(

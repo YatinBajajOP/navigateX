@@ -10,10 +10,10 @@ import 'route_info_model.dart';
 export 'route_info_model.dart';
 
 class RouteInfoWidget extends StatefulWidget {
-  const RouteInfoWidget({Key? key}) : super(key: key);
+  const RouteInfoWidget({super.key});
 
   @override
-  _RouteInfoWidgetState createState() => _RouteInfoWidgetState();
+  State<RouteInfoWidget> createState() => _RouteInfoWidgetState();
 }
 
 class _RouteInfoWidgetState extends State<RouteInfoWidget> {
@@ -44,6 +44,8 @@ class _RouteInfoWidgetState extends State<RouteInfoWidget> {
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus

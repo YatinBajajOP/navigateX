@@ -61,6 +61,11 @@ class RouteDataRecord extends FirestoreRecord {
   String get status => _status ?? '';
   bool hasStatus() => _status != null;
 
+  // "shift" field.
+  DateTime? _shift;
+  DateTime? get shift => _shift;
+  bool hasShift() => _shift != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _location = snapshotData['location'] as LatLng?;
@@ -71,6 +76,7 @@ class RouteDataRecord extends FirestoreRecord {
     _driverLoc = snapshotData['driver_loc'] as LatLng?;
     _vehicle = snapshotData['vehicle'] as DocumentReference?;
     _status = snapshotData['status'] as String?;
+    _shift = snapshotData['shift'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -117,6 +123,7 @@ Map<String, dynamic> createRouteDataRecordData({
   LatLng? driverLoc,
   DocumentReference? vehicle,
   String? status,
+  DateTime? shift,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -129,6 +136,7 @@ Map<String, dynamic> createRouteDataRecordData({
       'driver_loc': driverLoc,
       'vehicle': vehicle,
       'status': status,
+      'shift': shift,
     }.withoutNulls,
   );
 
@@ -148,7 +156,8 @@ class RouteDataRecordDocumentEquality implements Equality<RouteDataRecord> {
         e1?.employee == e2?.employee &&
         e1?.driverLoc == e2?.driverLoc &&
         e1?.vehicle == e2?.vehicle &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.shift == e2?.shift;
   }
 
   @override
@@ -161,7 +170,8 @@ class RouteDataRecordDocumentEquality implements Equality<RouteDataRecord> {
         e?.employee,
         e?.driverLoc,
         e?.vehicle,
-        e?.status
+        e?.status,
+        e?.shift
       ]);
 
   @override

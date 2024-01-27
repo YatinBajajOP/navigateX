@@ -12,10 +12,10 @@ import 'route_details_model.dart';
 export 'route_details_model.dart';
 
 class RouteDetailsWidget extends StatefulWidget {
-  const RouteDetailsWidget({Key? key}) : super(key: key);
+  const RouteDetailsWidget({super.key});
 
   @override
-  _RouteDetailsWidgetState createState() => _RouteDetailsWidgetState();
+  State<RouteDetailsWidget> createState() => _RouteDetailsWidgetState();
 }
 
 class _RouteDetailsWidgetState extends State<RouteDetailsWidget> {
@@ -46,6 +46,8 @@ class _RouteDetailsWidgetState extends State<RouteDetailsWidget> {
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return Scaffold(
       key: scaffoldKey,

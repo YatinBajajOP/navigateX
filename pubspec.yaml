@@ -30,6 +30,7 @@ dependencies:
   cloud_firestore: 4.13.1
   cloud_firestore_platform_interface: 6.0.5
   cloud_firestore_web: 3.8.5
+  collection: ^1.18.0
   firebase_auth: 4.15.2
   firebase_auth_platform_interface: 7.0.8
   firebase_auth_web: 5.8.11
@@ -41,8 +42,10 @@ dependencies:
   firebase_performance_web: 0.1.4+16
   flutter_animate: 4.1.1+1
   flutter_cache_manager: 3.3.1
-  flutter_facebook_auth: 4.4.1+1
+  flutter_facebook_auth: 4.0.0
   flutter_plugin_android_lifecycle: 2.0.17
+  flutter_rating_bar: 4.0.1
+  flutter_windowmanager: ^0.2.0
   font_awesome_flutter: 10.6.0
   from_css_color: 2.0.0
   geolocator: 10.0.1
@@ -95,23 +98,11 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
-  flutter_launcher_icons: 0.13.1
   flutter_lints: 3.0.0
-  image: 4.0.17
   lints: 3.0.0
 
   flutter_test:
     sdk: flutter
-
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  web:
-    generate: true
-  image_path: 'assets/images/app_launcher_icon.png'
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

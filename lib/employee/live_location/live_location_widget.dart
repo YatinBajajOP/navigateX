@@ -15,10 +15,10 @@ import 'live_location_model.dart';
 export 'live_location_model.dart';
 
 class LiveLocationWidget extends StatefulWidget {
-  const LiveLocationWidget({Key? key}) : super(key: key);
+  const LiveLocationWidget({super.key});
 
   @override
-  _LiveLocationWidgetState createState() => _LiveLocationWidgetState();
+  State<LiveLocationWidget> createState() => _LiveLocationWidgetState();
 }
 
 class _LiveLocationWidgetState extends State<LiveLocationWidget> {
@@ -49,6 +49,8 @@ class _LiveLocationWidgetState extends State<LiveLocationWidget> {
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus

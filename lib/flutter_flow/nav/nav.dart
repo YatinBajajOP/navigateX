@@ -125,6 +125,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'liveLocation',
           path: '/liveLocation',
           builder: (context, params) => LiveLocationWidget(),
+        ),
+        FFRoute(
+          name: 'feedback',
+          path: '/feedback',
+          builder: (context, params) => FeedbackWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

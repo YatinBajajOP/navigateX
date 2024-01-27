@@ -5,8 +5,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:map_launcher/map_launcher.dart' as $ml;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -16,10 +17,10 @@ import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key}) : super(key: key);
+  const HomePageWidget({super.key});
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -59,6 +60,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -66,16 +69,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            context.pushNamed('navigate');
-          },
-          backgroundColor: Color(0xFF006193),
-          elevation: 8.0,
-          child: Icon(
-            Icons.map,
-            color: FlutterFlowTheme.of(context).info,
-            size: 20.0,
+        floatingActionButton: Align(
+          alignment: AlignmentDirectional(1.0, 1.0),
+          child: FloatingActionButton(
+            onPressed: () async {
+              unawaited(
+                () async {
+                  await launchMap(
+                    location: FFAppState().filLocation,
+                    title: 'Fidelity International',
+                  );
+                }(),
+              );
+            },
+            backgroundColor: Color(0xFF006193),
+            elevation: 8.0,
+            child: Icon(
+              Icons.business,
+              color: FlutterFlowTheme.of(context).info,
+              size: 20.0,
+            ),
           ),
         ),
         appBar: AppBar(
@@ -84,11 +97,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           leading: FlutterFlowIconButton(
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 54.0,
+            buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
+              size: 30.0,
             ),
             onPressed: () async {
               context.pop();
@@ -99,10 +112,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ROUTE FOR : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
+                'Route for : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily: 'Roboto Mono',
-                      fontSize: 20.0,
+                      fontFamily: 'Roboto',
+                      fontSize: 24.0,
                     ),
               ),
               InkWell(
@@ -131,219 +144,296 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-            child: StreamBuilder<List<RouteDataRecord>>(
-              stream: queryRouteDataRecord(
-                queryBuilder: (routeDataRecord) => routeDataRecord
-                    .where(
-                      'driver',
-                      isEqualTo: currentUserReference,
-                    )
-                    .orderBy('eta'),
-              ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).primary,
-                        ),
+          child: StreamBuilder<List<RouteDataRecord>>(
+            stream: queryRouteDataRecord(
+              queryBuilder: (routeDataRecord) => routeDataRecord
+                  .where(
+                    'driver',
+                    isEqualTo: currentUserReference,
+                  )
+                  .orderBy('eta'),
+            ),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
                       ),
                     ),
-                  );
-                }
-                List<RouteDataRecord> listViewRouteDataRecordList =
-                    snapshot.data!;
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
-                  itemCount: listViewRouteDataRecordList.length,
-                  itemBuilder: (context, listViewIndex) {
-                    final listViewRouteDataRecord =
-                        listViewRouteDataRecordList[listViewIndex];
-                    return Visibility(
-                      visible: (listViewRouteDataRecord.status == null ||
-                              listViewRouteDataRecord.status == '') ||
-                          (listViewRouteDataRecord.status == 'Reached'),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: listViewRouteDataRecord.status == 'Reached'
-                                ? Color(0xAC4AA00F)
-                                : Color(0xFFF6EFED),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 9.0,
-                                color: Color(0x2F1D2429),
-                                offset: Offset(0.0, 5.0),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 8.0, 12.0, 8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.person,
-                                  color: Color(0xFF006193),
-                                  size: 32.0,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 8.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          listViewRouteDataRecord.name,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF14181B),
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            listViewRouteDataRecord.address,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily:
-                                                      'Plus Jakarta Sans',
-                                                  color: Color(0xFF57636C),
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                          ),
-                                        ),
-                                        Text(
-                                          dateTimeFormat('jm',
-                                              listViewRouteDataRecord.eta!),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Rubik',
-                                                color: Color(0xFF414956),
-                                                fontSize: 12.0,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 4.0, 0.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor: Color(0xFFE0E3E7),
-                                    borderRadius: 8.0,
-                                    borderWidth: 2.0,
-                                    buttonSize: 40.0,
-                                    icon: Icon(
-                                      Icons.location_on,
-                                      color: Color(0xFF57636C),
-                                      size: 20.0,
-                                    ),
-                                    onPressed: () async {
-                                      currentUserLocationValue =
-                                          await getCurrentUserLocation(
-                                              defaultLocation:
-                                                  LatLng(0.0, 0.0));
-                                      await launchMap(
-                                        location:
-                                            listViewRouteDataRecord.location,
-                                        title: '',
-                                      );
-
-                                      while (true) {
-                                        await Future.delayed(const Duration(
-                                            milliseconds: 60000));
-
-                                        await listViewRouteDataRecord.reference
-                                            .update(createRouteDataRecordData(
-                                          driverLoc: currentUserLocationValue,
-                                        ));
-                                      }
-                                    },
-                                  ),
-                                ),
-                                FlutterFlowIconButton(
-                                  borderColor: Color(0xFFE0E3E7),
-                                  borderRadius: 8.0,
-                                  borderWidth: 2.0,
-                                  buttonSize: 40.0,
-                                  icon: Icon(
-                                    Icons.more_vert,
-                                    color: Color(0xFF57636C),
-                                    size: 20.0,
-                                  ),
-                                  onPressed: () async {
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Color(0x00414956),
-                                      barrierColor:
-                                          FlutterFlowTheme.of(context).accent4,
-                                      useSafeArea: true,
-                                      context: context,
-                                      builder: (context) {
-                                        return GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child: Padding(
-                                            padding: MediaQuery.viewInsetsOf(
-                                                context),
-                                            child: Container(
-                                              height: MediaQuery.sizeOf(context)
-                                                      .height *
-                                                  0.25,
-                                              child: RouteStatusWidget(
-                                                routeId: listViewRouteDataRecord
-                                                    .reference,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(() {}));
-                                  },
-                                ),
-                              ],
+                  ),
+                );
+              }
+              List<RouteDataRecord> containerRouteDataRecordList =
+                  snapshot.data!;
+              return Container(
+                height: MediaQuery.sizeOf(context).height * 0.9,
+                decoration: BoxDecoration(),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 0.0, 10.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              containerRouteDataRecordList.isNotEmpty
+                                  ? valueOrDefault<String>(
+                                      'Shift time: ${functions.getShiftTime(containerRouteDataRecordList.toList())?.toString()}',
+                                      'No pickups Scheduled',
+                                    )
+                                  : 'No Rides Scheduled',
+                              'No Rides Scheduled',
                             ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Rubik',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
                         ),
                       ),
-                    );
-                  },
-                );
-              },
-            ),
+                      Container(
+                        height: MediaQuery.sizeOf(context).height * 0.9,
+                        decoration: BoxDecoration(),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 12.0, 0.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final routes = containerRouteDataRecordList
+                                  .where((e) =>
+                                      dateTimeFormat('Hm', e.shift) ==
+                                      dateTimeFormat(
+                                          'Hm',
+                                          functions.getShiftTime(
+                                              containerRouteDataRecordList
+                                                  .toList())))
+                                  .toList();
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                itemCount: routes.length,
+                                itemBuilder: (context, routesIndex) {
+                                  final routesItem = routes[routesIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 16.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: routesItem.status != null &&
+                                                routesItem.status != ''
+                                            ? FlutterFlowTheme.of(context)
+                                                .accent4
+                                            : FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 8.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            offset: Offset(0.0, 2.0),
+                                          )
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 8.0, 12.0, 8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              color: Color(0xFF006193),
+                                              size: 32.0,
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 8.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      routesItem.name,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: Color(
+                                                                0xFF14181B),
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        routesItem.address
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 50,
+                                                          replacement: '…',
+                                                        ),
+                                                        maxLines: 2,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .labelSmall
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Plus Jakarta Sans',
+                                                              color: Color(
+                                                                  0xFF57636C),
+                                                              fontSize: 12.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      dateTimeFormat('jm',
+                                                          routesItem.eta!),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Rubik',
+                                                            color: Color(
+                                                                0xFF414956),
+                                                            fontSize: 12.0,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Color(0xFFE0E3E7),
+                                                borderRadius: 8.0,
+                                                borderWidth: 2.0,
+                                                buttonSize: 40.0,
+                                                icon: Icon(
+                                                  Icons.location_on,
+                                                  color: Color(0xFF57636C),
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  currentUserLocationValue =
+                                                      await getCurrentUserLocation(
+                                                          defaultLocation:
+                                                              LatLng(0.0, 0.0));
+                                                  await launchMap(
+                                                    location:
+                                                        routesItem.location,
+                                                    title: '',
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderColor: Color(0xFFE0E3E7),
+                                              borderRadius: 8.0,
+                                              borderWidth: 2.0,
+                                              buttonSize: 40.0,
+                                              icon: Icon(
+                                                Icons.more_vert,
+                                                color: Color(0xFF57636C),
+                                                size: 20.0,
+                                              ),
+                                              onPressed: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  barrierColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                  useSafeArea: true,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.2,
+                                                          child:
+                                                              RouteStatusWidget(
+                                                            routeId: routesItem
+                                                                .reference,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
