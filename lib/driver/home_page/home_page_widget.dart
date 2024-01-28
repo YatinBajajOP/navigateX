@@ -13,6 +13,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '/components/call/signaling.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -332,6 +333,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     ),
                                                   ],
                                                 ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Color(0xFFE0E3E7),
+                                                borderRadius: 8.0,
+                                                borderWidth: 2.0,
+                                                buttonSize: 40.0,
+                                                icon: Icon(
+                                                  Icons.call,
+                                                  color: Color(0xFF57636C),
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  currentUserLocationValue =
+                                                      await getCurrentUserLocation(
+                                                          defaultLocation:
+                                                              LatLng(0.0, 0.0));
+                                                  await launchMap(
+                                                    location:
+                                                        routesItem.location,
+                                                    title: '',
+                                                  );
+                                                },
                                               ),
                                             ),
                                             Padding(
