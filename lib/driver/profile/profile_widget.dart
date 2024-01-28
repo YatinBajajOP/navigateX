@@ -56,7 +56,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         title: Text(
           'My Profile',
           style: FlutterFlowTheme.of(context).displaySmall.override(
-                fontFamily: 'Roboto Mono',
+                fontFamily: 'Roboto',
                 color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 28.0,
               ),
@@ -81,7 +81,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     child: Text(
                       currentUserEmail,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Rubik',
+                            fontFamily: 'Roboto',
                             color: FlutterFlowTheme.of(context).primaryText,
                           ),
                     ),
@@ -108,7 +108,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 12.0),
                   child: Text(
                     'My Account Information',
-                    style: FlutterFlowTheme.of(context).labelMedium,
+                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                          fontFamily: 'Roboto',
+                        ),
                   ),
                 ),
               ),
@@ -140,7 +142,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         children: [
                           Text(
                             'Change Password',
-                            style: FlutterFlowTheme.of(context).bodyLarge,
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Roboto',
+                                    ),
                           ),
                           Expanded(
                             child: Align(
@@ -179,7 +184,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 12.0),
                   child: Text(
                     'Support',
-                    style: FlutterFlowTheme.of(context).labelMedium,
+                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                          fontFamily: 'Roboto',
+                        ),
                   ),
                 ),
               ),
@@ -223,7 +230,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
-                                    fontFamily: 'Rubik',
+                                    fontFamily: 'Roboto',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                   ),
@@ -274,7 +281,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         children: [
                           Text(
                             'Submit a Feature Request',
-                            style: FlutterFlowTheme.of(context).bodyLarge,
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Roboto',
+                                    ),
                           ),
                           Expanded(
                             child: Align(
@@ -319,7 +329,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       color: Color(0xFF4AA00F),
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Rubik',
+                                fontFamily: 'Roboto',
                                 color: Color(0xFFF6EFED),
                                 fontWeight: FontWeight.w500,
                               ),

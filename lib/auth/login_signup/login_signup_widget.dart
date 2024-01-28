@@ -175,7 +175,6 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                         labelText: 'Email Address',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
-                                        hintText: 'Enter your email...',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodySmall
                                             .override(
@@ -249,7 +248,6 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                         labelText: 'Password',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
-                                        hintText: 'Enter your password...',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
                                         enabledBorder: OutlineInputBorder(
@@ -342,8 +340,7 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                       },
                                       text: 'Sign In',
                                       options: FFButtonOptions(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            22.0, 22.0, 22.0, 22.0),
+                                        padding: EdgeInsets.all(20.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -359,11 +356,11 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                        elevation: 2.0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
-                                          width: 1.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(0.0),
                                       ),
                                       showLoadingIndicator: false,
                                     ),
@@ -561,10 +558,17 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                         focusNode: _model.nameFocusNode,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Name',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodySmall,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Rubik',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                          alignLabelWithHint: false,
                                           hintText: 'Enter your name...',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
@@ -634,7 +638,6 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                             _model.emailAddressCreateFocusNode,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Email Address',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodySmall,
@@ -708,7 +711,6 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                         obscureText:
                                             !_model.passwordCreateVisibility,
                                         decoration: InputDecoration(
-                                          labelText: 'Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodySmall,
@@ -801,7 +803,6 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                         obscureText:
                                             !_model.rpasswordCreateVisibility,
                                         decoration: InputDecoration(
-                                          labelText: 'Retype Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodySmall,
@@ -982,7 +983,7 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                       },
                                       text: 'Create Account',
                                       options: FFButtonOptions(
-                                        padding: EdgeInsets.all(16.0),
+                                        padding: EdgeInsets.all(20.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
@@ -998,11 +999,11 @@ class _LoginSignupWidgetState extends State<LoginSignupWidget>
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                        elevation: 2.0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
-                                          width: 1.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(0.0),
                                       ),
                                       showLoadingIndicator: false,
                                     ),

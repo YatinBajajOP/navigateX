@@ -71,7 +71,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: Align(
           alignment: AlignmentDirectional(1.0, 1.0),
-          child: FloatingActionButton(
+          child: FloatingActionButton.extended(
             onPressed: () async {
               unawaited(
                 () async {
@@ -84,10 +84,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             },
             backgroundColor: Color(0xFF006193),
             elevation: 8.0,
-            child: Icon(
-              Icons.business,
-              color: FlutterFlowTheme.of(context).info,
-              size: 20.0,
+            label: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Icon(
+                  Icons.business,
+                  color: FlutterFlowTheme.of(context).info,
+                  size: 22.0,
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'Navigate to FIL',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Roboto',
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          fontWeight: FontWeight.w500,
+                        ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -115,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 'Route for : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
                       fontFamily: 'Roboto',
-                      fontSize: 24.0,
+                      fontSize: 22.0,
                     ),
               ),
               InkWell(
@@ -186,7 +202,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             valueOrDefault<String>(
                               containerRouteDataRecordList.isNotEmpty
                                   ? valueOrDefault<String>(
-                                      'Shift time: ${functions.getShiftTime(containerRouteDataRecordList.toList())?.toString()}',
+                                      'Shift time: ${dateTimeFormat('jm', functions.getShiftTime(containerRouteDataRecordList.toList()))}',
                                       'No pickups Scheduled',
                                     )
                                   : 'No Rides Scheduled',
@@ -195,7 +211,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Rubik',
+                                  fontFamily: 'Roboto',
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -279,7 +295,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           .bodyLarge
                                                           .override(
                                                             fontFamily:
-                                                                'Plus Jakarta Sans',
+                                                                'Roboto',
                                                             color: Color(
                                                                 0xFF14181B),
                                                             fontSize: 16.0,
@@ -307,7 +323,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             .labelSmall
                                                             .override(
                                                               fontFamily:
-                                                                  'Plus Jakarta Sans',
+                                                                  'Roboto',
                                                               color: Color(
                                                                   0xFF57636C),
                                                               fontSize: 12.0,
@@ -320,15 +336,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     Text(
                                                       dateTimeFormat('jm',
                                                           routesItem.eta!),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Rubik',
-                                                            color: Color(
-                                                                0xFF414956),
-                                                            fontSize: 12.0,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                color: Color(
+                                                                    0xFF414956),
+                                                                fontSize: 12.0,
+                                                              ),
                                                     ),
                                                   ],
                                                 ),
@@ -374,13 +392,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 await showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
+                                                      Color(0x00F6F6F6),
                                                   barrierColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
+                                                      Color(0x001C1212),
                                                   useSafeArea: true,
                                                   context: context,
                                                   builder: (context) {
