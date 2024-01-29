@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -73,6 +73,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           alignment: AlignmentDirectional(1.0, 1.0),
           child: FloatingActionButton.extended(
             onPressed: () async {
+              await actions.log(
+                'NAVIGATION_TO_FIL_STARTED',
+                currentUserReference!,
+                null,
+              );
               unawaited(
                 () async {
                   await launchMap(
@@ -110,49 +115,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Route for : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
-                style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily: 'Roboto',
-                      fontSize: 22.0,
-                    ),
-              ),
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  GoRouter.of(context).prepareAuthEvent();
-                  await authManager.signOut();
-                  GoRouter.of(context).clearRedirectLocation();
-
-                  context.goNamedAuth('login_signup', context.mounted);
-                },
-                child: Icon(
-                  Icons.logout,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 30.0,
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Route for : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily: 'Roboto',
+                        fontSize: 22.0,
+                      ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -312,12 +289,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        routesItem.address
-                                                            .maybeHandleOverflow(
-                                                          maxChars: 50,
-                                                          replacement: '…',
-                                                        ),
-                                                        maxLines: 2,
+                                                        routesItem.address,
+                                                        maxLines: 4,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .labelSmall
@@ -329,24 +302,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               fontSize: 12.0,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w500,
+                                                                      .w600,
                                                             ),
                                                       ),
                                                     ),
-                                                    Text(
-                                                      dateTimeFormat('jm',
-                                                          routesItem.eta!),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Roboto',
-                                                                color: Color(
-                                                                    0xFF414956),
-                                                                fontSize: 12.0,
-                                                              ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        dateTimeFormat('jm',
+                                                            routesItem.eta!),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Roboto',
+                                                              color: Color(
+                                                                  0xFF414956),
+                                                              fontSize: 12.0,
+                                                            ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -366,10 +347,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   size: 20.0,
                                                 ),
                                                 onPressed: () async {
-                                                  currentUserLocationValue =
-                                                      await getCurrentUserLocation(
-                                                          defaultLocation:
-                                                              LatLng(0.0, 0.0));
+                                                  await actions.log(
+                                                    'NAVIGATION_STARTED',
+                                                    currentUserReference!,
+                                                    routesItem.employee,
+                                                  );
                                                   await launchMap(
                                                     location:
                                                         routesItem.location,
@@ -421,8 +403,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   0.2,
                                                           child:
                                                               RouteStatusWidget(
-                                                            routeId: routesItem
-                                                                .reference,
+                                                            routeDocument:
+                                                                routesItem,
+                                                            routeFinished: containerRouteDataRecordList
+                                                                        .where((e) =>
+                                                                            (e.status == null || e.status == '') &&
+                                                                            (dateTimeFormat('Hm', e.shift) ==
+                                                                                dateTimeFormat('Hm', functions.getShiftTime(containerRouteDataRecordList.toList()))))
+                                                                        .toList()
+                                                                        .length ==
+                                                                    1
+                                                                ? true
+                                                                : false,
                                                           ),
                                                         ),
                                                       ),
