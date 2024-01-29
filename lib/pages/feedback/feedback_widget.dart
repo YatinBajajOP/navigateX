@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -479,7 +480,13 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                                   givenBy: currentUserReference,
                                   feedback: _model.textController.text,
                                   rating: _model.ratingBarValue?.round(),
+                                  timestamp: getCurrentTimestamp,
                                 ));
+                            await actions.log(
+                              'FEEDBACK_RECORDED',
+                              currentUserReference!,
+                              null,
+                            );
 
                             context.pushNamed('home_page');
                           },

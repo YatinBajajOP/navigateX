@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,10 +15,12 @@ export 'route_status_model.dart';
 class RouteStatusWidget extends StatefulWidget {
   const RouteStatusWidget({
     super.key,
-    required this.routeId,
-  });
+    required this.routeDocument,
+    bool? routeFinished,
+  }) : this.routeFinished = routeFinished ?? false;
 
-  final DocumentReference? routeId;
+  final RouteDataRecord? routeDocument;
+  final bool routeFinished;
 
   @override
   State<RouteStatusWidget> createState() => _RouteStatusWidgetState();
@@ -73,14 +76,30 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               onTap: () async {
                 unawaited(
                   () async {
-                    await widget.routeId!.update(createRouteDataRecordData(
+                    await widget.routeDocument!.reference
+                        .update(createRouteDataRecordData(
                       status: 'Pick up',
                     ));
                   }(),
                 );
                 Navigator.pop(context);
+                await actions.log(
+                  'EMPLOYEE_PICKED_UP',
+                  currentUserReference!,
+                  widget.routeDocument?.employee,
+                );
+                if (widget.routeFinished) {
+                  context.pushNamed('feedback');
 
-                context.pushNamed('feedback');
+                  await actions.log(
+                    'PICKUPS_COMPLETED',
+                    currentUserReference!,
+                    widget.routeDocument?.employee,
+                  );
+                  return;
+                } else {
+                  return;
+                }
               },
               child: Text(
                 'Picked Up ',
@@ -108,12 +127,30 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             onTap: () async {
               unawaited(
                 () async {
-                  await widget.routeId!.update(createRouteDataRecordData(
+                  await widget.routeDocument!.reference
+                      .update(createRouteDataRecordData(
                     status: 'No Show',
                   ));
                 }(),
               );
               Navigator.pop(context);
+              await actions.log(
+                'EMPLOYEE_NO_SHOW',
+                currentUserReference!,
+                widget.routeDocument?.employee,
+              );
+              if (widget.routeFinished) {
+                context.pushNamed('feedback');
+
+                await actions.log(
+                  'PICKUPS_COMPLETED',
+                  currentUserReference!,
+                  widget.routeDocument?.employee,
+                );
+                return;
+              } else {
+                return;
+              }
             },
             child: Text(
               'No Show',
@@ -140,12 +177,30 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             onTap: () async {
               unawaited(
                 () async {
-                  await widget.routeId!.update(createRouteDataRecordData(
+                  await widget.routeDocument!.reference
+                      .update(createRouteDataRecordData(
                     status: 'Late',
                   ));
                 }(),
               );
               Navigator.pop(context);
+              await actions.log(
+                'EMPLOYEE_LATE',
+                currentUserReference!,
+                widget.routeDocument?.employee,
+              );
+              if (widget.routeFinished) {
+                context.pushNamed('feedback');
+
+                await actions.log(
+                  'PICKUPS_COMPLETED',
+                  currentUserReference!,
+                  widget.routeDocument?.employee,
+                );
+                return;
+              } else {
+                return;
+              }
             },
             child: Text(
               'Late',

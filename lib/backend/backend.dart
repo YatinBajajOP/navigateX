@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/route_data_record.dart';
 import 'schema/vehicle_data_record.dart';
 import 'schema/feedbacks_record.dart';
+import 'schema/logs_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +21,7 @@ export 'schema/users_record.dart';
 export 'schema/route_data_record.dart';
 export 'schema/vehicle_data_record.dart';
 export 'schema/feedbacks_record.dart';
+export 'schema/logs_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -164,6 +166,43 @@ Future<List<FeedbacksRecord>> queryFeedbacksRecordOnce({
     queryCollectionOnce(
       FeedbacksRecord.collection,
       FeedbacksRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query LogsRecords (as a Stream and as a Future).
+Future<int> queryLogsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      LogsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<LogsRecord>> queryLogsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      LogsRecord.collection,
+      LogsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<LogsRecord>> queryLogsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      LogsRecord.collection,
+      LogsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
