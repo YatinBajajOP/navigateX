@@ -6,4 +6,4 @@ export '/driver/profile/profile_widget.dart' show ProfileWidget;
 export '/employee/route_details/route_details_widget.dart' show RouteDetailsWidget;
 export '/pages/route_info/route_info_widget.dart' show RouteInfoWidget;
 export '/employee/live_location/live_location_widget.dart' show LiveLocationWidget;
-export '/feedback/feedback_widget.dart' show FeedbackWidget;
+export '/pages/feedback/feedback_widget.dart' show FeedbackWidget;
