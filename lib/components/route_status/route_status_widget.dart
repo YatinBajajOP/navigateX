@@ -55,7 +55,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).tertiary,
+        color: Color(0xFF515B6B),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -74,38 +74,30 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                unawaited(
-                  () async {
-                    await widget.routeDocument!.reference
-                        .update(createRouteDataRecordData(
-                      status: 'Pick up',
-                    ));
-                  }(),
+                context.pushNamed(
+                  'pickup_verification',
+                  queryParameters: {
+                    'routeID': serializeParam(
+                      widget.routeDocument,
+                      ParamType.Document,
+                    ),
+                    'routeCompleted': serializeParam(
+                      widget.routeFinished,
+                      ParamType.bool,
+                    ),
+                  }.withoutNulls,
+                  extra: <String, dynamic>{
+                    'routeID': widget.routeDocument,
+                  },
                 );
-                Navigator.pop(context);
-                await actions.log(
-                  'EMPLOYEE_PICKED_UP',
-                  currentUserReference!,
-                  widget.routeDocument?.employee,
-                );
-                if (widget.routeFinished) {
-                  context.pushNamed('feedback');
 
-                  await actions.log(
-                    'PICKUPS_COMPLETED',
-                    currentUserReference!,
-                    widget.routeDocument?.employee,
-                  );
-                  return;
-                } else {
-                  return;
-                }
+                Navigator.pop(context);
               },
               child: Text(
                 'Picked Up ',
                 style: FlutterFlowTheme.of(context).labelLarge.override(
                       fontFamily: 'Rubik',
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      color: FlutterFlowTheme.of(context).success,
                       fontSize: 24.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -156,7 +148,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               'No Show',
               style: FlutterFlowTheme.of(context).labelLarge.override(
                     fontFamily: 'Rubik',
-                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    color: FlutterFlowTheme.of(context).error,
                     fontSize: 24.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -206,7 +198,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               'Late',
               style: FlutterFlowTheme.of(context).labelLarge.override(
                     fontFamily: 'Rubik',
-                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    color: FlutterFlowTheme.of(context).warning,
                     fontSize: 24.0,
                     fontWeight: FontWeight.w500,
                   ),

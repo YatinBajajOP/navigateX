@@ -130,6 +130,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'feedback',
           path: '/feedback',
           builder: (context, params) => FeedbackWidget(),
+        ),
+        FFRoute(
+          name: 'pickup_verification',
+          path: '/pickupVerification',
+          asyncParams: {
+            'routeID': getDoc(['route_data'], RouteDataRecord.fromSnapshot),
+          },
+          builder: (context, params) => PickupVerificationWidget(
+            routeID: params.getParam('routeID', ParamType.Document),
+            routeCompleted: params.getParam('routeCompleted', ParamType.bool),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

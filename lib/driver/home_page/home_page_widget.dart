@@ -122,7 +122,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Route for : ${dateTimeFormat('d/M/y', getCurrentTimestamp)}',
+                  'Route Details',
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily: 'Roboto',
                         fontSize: 22.0,
@@ -174,17 +174,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 0.0, 0.0),
+                          child: Text(
+                            containerRouteDataRecordList.isNotEmpty
+                                ? 'Route for : ${dateTimeFormat('d/M/y', functions.getShiftTime(containerRouteDataRecordList.toList()))}'
+                                : 'No routes Scheduled',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 20.0, 0.0, 10.0),
                           child: Text(
-                            valueOrDefault<String>(
-                              containerRouteDataRecordList.isNotEmpty
-                                  ? valueOrDefault<String>(
-                                      'Shift time: ${dateTimeFormat('jm', functions.getShiftTime(containerRouteDataRecordList.toList()))}',
-                                      'No pickups Scheduled',
-                                    )
-                                  : 'No Rides Scheduled',
-                              'No Rides Scheduled',
-                            ),
+                            containerRouteDataRecordList.isNotEmpty
+                                ? valueOrDefault<String>(
+                                    containerRouteDataRecordList.isNotEmpty
+                                        ? valueOrDefault<String>(
+                                            'Shift time: ${dateTimeFormat('jm', functions.getShiftTime(containerRouteDataRecordList.toList()))}',
+                                            'No pickups Scheduled',
+                                          )
+                                        : 'No Rides Scheduled',
+                                    'No Rides Scheduled',
+                                  )
+                                : ' ',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -221,8 +242,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 16.0),
-                                    child: Container(
-                                      width: double.infinity,
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 100),
+                                      curve: Curves.easeIn,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.9,
                                       decoration: BoxDecoration(
                                         color: routesItem.status != null &&
                                                 routesItem.status != ''
@@ -342,6 +366,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 borderWidth: 2.0,
                                                 buttonSize: 40.0,
                                                 icon: Icon(
+                                                  Icons.call,
+                                                  color: Color(0xFF57636C),
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  await actions.log(
+                                                    'EMPLOYEE_CALLED',
+                                                    currentUserReference!,
+                                                    routesItem.employee,
+                                                  );
+                                                  // CALL EMPLOYEE
+                                                },
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Color(0xFFE0E3E7),
+                                                borderRadius: 8.0,
+                                                borderWidth: 2.0,
+                                                buttonSize: 40.0,
+                                                icon: Icon(
                                                   Icons.location_on,
                                                   color: Color(0xFF57636C),
                                                   size: 20.0,
@@ -360,70 +407,113 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 },
                                               ),
                                             ),
-                                            FlutterFlowIconButton(
-                                              borderColor: Color(0xFFE0E3E7),
-                                              borderRadius: 8.0,
-                                              borderWidth: 2.0,
-                                              buttonSize: 40.0,
-                                              icon: Icon(
-                                                Icons.more_vert,
-                                                color: Color(0xFF57636C),
-                                                size: 20.0,
-                                              ),
-                                              onPressed: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Color(0x00F6F6F6),
-                                                  barrierColor:
-                                                      Color(0x001C1212),
-                                                  useSafeArea: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: Container(
-                                                          height:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .height *
-                                                                  0.2,
-                                                          child:
-                                                              RouteStatusWidget(
-                                                            routeDocument:
-                                                                routesItem,
-                                                            routeFinished: containerRouteDataRecordList
-                                                                        .where((e) =>
-                                                                            (e.status == null || e.status == '') &&
-                                                                            (dateTimeFormat('Hm', e.shift) ==
-                                                                                dateTimeFormat('Hm', functions.getShiftTime(containerRouteDataRecordList.toList()))))
-                                                                        .toList()
-                                                                        .length ==
-                                                                    1
-                                                                ? true
-                                                                : false,
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Color(0xFFE0E3E7),
+                                                borderRadius: 8.0,
+                                                borderWidth: 2.0,
+                                                buttonSize: 40.0,
+                                                icon: Icon(
+                                                  Icons.more_vert,
+                                                  color: Color(0xFF57636C),
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Color(0x00F6F6F6),
+                                                    barrierColor:
+                                                        Color(0x001C1212),
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child: Container(
+                                                            height: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .height *
+                                                                0.2,
+                                                            child:
+                                                                RouteStatusWidget(
+                                                              routeDocument:
+                                                                  routesItem,
+                                                              routeFinished: containerRouteDataRecordList
+                                                                          .where((e) =>
+                                                                              (e.status == null || e.status == '') &&
+                                                                              (dateTimeFormat('Hm', e.shift) == dateTimeFormat('Hm', functions.getShiftTime(containerRouteDataRecordList.toList()))))
+                                                                          .toList()
+                                                                          .length ==
+                                                                      1
+                                                                  ? true
+                                                                  : false,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                },
+                                              ),
                                             ),
+                                            if (routesItem.status != null &&
+                                                routesItem.status != '')
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 4.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Color(0xFFE0E3E7),
+                                                  borderRadius: 8.0,
+                                                  borderWidth: 2.0,
+                                                  buttonSize: 40.0,
+                                                  icon: Icon(
+                                                    Icons.circle,
+                                                    color: () {
+                                                      if (routesItem.status ==
+                                                          'Pick up') {
+                                                        return FlutterFlowTheme
+                                                                .of(context)
+                                                            .success;
+                                                      } else if (routesItem
+                                                              .status ==
+                                                          'No Show') {
+                                                        return FlutterFlowTheme
+                                                                .of(context)
+                                                            .error;
+                                                      } else {
+                                                        return FlutterFlowTheme
+                                                                .of(context)
+                                                            .warning;
+                                                      }
+                                                    }(),
+                                                    size: 20.0,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
+                                                ),
+                                              ),
                                           ],
                                         ),
                                       ),
