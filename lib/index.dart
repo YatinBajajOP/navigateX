@@ -9,3 +9,5 @@ export '/pages/route_info/route_info_widget.dart' show RouteInfoWidget;
 export '/employee/live_location/live_location_widget.dart'
     show LiveLocationWidget;
 export '/pages/feedback/feedback_widget.dart' show FeedbackWidget;
+export '/driver/pickup_verification/pickup_verification_widget.dart'
+    show PickupVerificationWidget;

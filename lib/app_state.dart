@@ -23,7 +23,7 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  LatLng? _filLocation = LatLng(28.424867, 77.025986);
+  LatLng? _filLocation = LatLng(28.424985035674837, 77.03084083925063);
   LatLng? get filLocation => _filLocation;
   set filLocation(LatLng? _value) {
     _filLocation = _value;
