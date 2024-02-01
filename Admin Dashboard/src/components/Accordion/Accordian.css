@@ -1,0 +1,43 @@
+.accordian-item {
+  border-bottom: 1px solid black;
+  overflow: hidden;
+  transition: all 0.2s linear;
+}
+
+.accordian-item>button {
+  width: 100%;
+  text-align: left;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.accordian-item>button.active {
+  color: var(--clr-primary);
+  background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+
+.accordian-item>button:hover {
+  background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+
+.accordian-item .arrow {
+  font-size: 2rem;
+  transition: inherit;
+}
+
+.arrow.active {
+  rotate: 180deg;
+  color: var(--clr-primary);
+}
+
+.accordian-item-answer {
+  padding: 0 1rem;
+  transition: inherit;
+}
