@@ -20,10 +20,12 @@ class PickupVerificationWidget extends StatefulWidget {
     super.key,
     required this.routeID,
     bool? routeCompleted,
+    required this.type,
   }) : this.routeCompleted = routeCompleted ?? false;
 
   final RouteDataRecord? routeID;
   final bool routeCompleted;
+  final String? type;
 
   @override
   State<PickupVerificationWidget> createState() =>
@@ -115,7 +117,7 @@ class _PickupVerificationWidgetState extends State<PickupVerificationWidget> {
                         child: Image.asset(
                           'assets/images/unlock.png',
                           width: MediaQuery.sizeOf(context).width * 0.45,
-                          height: MediaQuery.sizeOf(context).height * 0.18,
+                          height: MediaQuery.sizeOf(context).height * 0.2,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -292,7 +294,7 @@ class _PickupVerificationWidgetState extends State<PickupVerificationWidget> {
                                         () async {
                                           await widget.routeID!.reference
                                               .update(createRouteDataRecordData(
-                                            status: 'Pick up',
+                                            status: widget.type,
                                           ));
                                         }(),
                                       );

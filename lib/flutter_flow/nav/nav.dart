@@ -140,6 +140,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PickupVerificationWidget(
             routeID: params.getParam('routeID', ParamType.Document),
             routeCompleted: params.getParam('routeCompleted', ParamType.bool),
+            type: params.getParam('type', ParamType.String),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

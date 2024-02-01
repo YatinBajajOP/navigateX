@@ -85,6 +85,10 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                       widget.routeFinished,
                       ParamType.bool,
                     ),
+                    'type': serializeParam(
+                      'Pick up',
+                      ParamType.String,
+                    ),
                   }.withoutNulls,
                   extra: <String, dynamic>{
                     'routeID': widget.routeDocument,
@@ -96,10 +100,10 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               child: Text(
                 'Picked Up ',
                 style: FlutterFlowTheme.of(context).labelLarge.override(
-                      fontFamily: 'Rubik',
+                      fontFamily: 'Roboto',
                       color: FlutterFlowTheme.of(context).success,
                       fontSize: 24.0,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
             ),
@@ -147,10 +151,10 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             child: Text(
               'No Show',
               style: FlutterFlowTheme.of(context).labelLarge.override(
-                    fontFamily: 'Rubik',
+                    fontFamily: 'Roboto',
                     color: FlutterFlowTheme.of(context).error,
                     fontSize: 24.0,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
           ),
@@ -167,40 +171,36 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              unawaited(
-                () async {
-                  await widget.routeDocument!.reference
-                      .update(createRouteDataRecordData(
-                    status: 'Late',
-                  ));
-                }(),
+              context.pushNamed(
+                'pickup_verification',
+                queryParameters: {
+                  'routeID': serializeParam(
+                    widget.routeDocument,
+                    ParamType.Document,
+                  ),
+                  'routeCompleted': serializeParam(
+                    widget.routeFinished,
+                    ParamType.bool,
+                  ),
+                  'type': serializeParam(
+                    'Late',
+                    ParamType.String,
+                  ),
+                }.withoutNulls,
+                extra: <String, dynamic>{
+                  'routeID': widget.routeDocument,
+                },
               );
-              Navigator.pop(context);
-              await actions.log(
-                'EMPLOYEE_LATE',
-                currentUserReference!,
-                widget.routeDocument?.employee,
-              );
-              if (widget.routeFinished) {
-                context.pushNamed('feedback');
 
-                await actions.log(
-                  'PICKUPS_COMPLETED',
-                  currentUserReference!,
-                  widget.routeDocument?.employee,
-                );
-                return;
-              } else {
-                return;
-              }
+              Navigator.pop(context);
             },
             child: Text(
               'Late',
               style: FlutterFlowTheme.of(context).labelLarge.override(
-                    fontFamily: 'Rubik',
+                    fontFamily: 'Roboto',
                     color: FlutterFlowTheme.of(context).warning,
                     fontSize: 24.0,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
           ),
