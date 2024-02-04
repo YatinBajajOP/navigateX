@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import ROUTES from '../pages/Routes/Routes'
-import Logs from "../pages/Logs/logs";
-import Users from "../pages/Users/users";
-import Feedback from "../pages/Feedback/feedback";
+import Logs from "../pages/Logs/Logs";
+import Users from "../pages/Users/Users";
+import Feedback from "../pages/Feedback/Feedback";
 
 export const RootRouter = () => {
     return (

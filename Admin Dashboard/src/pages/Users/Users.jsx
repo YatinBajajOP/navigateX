@@ -17,8 +17,8 @@ const Users = () => {
           {routes.map((route, index) => (
             <div className="accordian-item" key={route.id}>
               <Accordian.AccordianHeader index={index}>
-              <div className="route-card-header-wrapper">
-                  <div className="route-card-header-data">
+              <div className="Users-card-header-wrapper">
+                  <div className="Users-card-header-data">
                     <p>{route.id}</p>
                     <p>{route.name}</p>
                     <p>{route.vehicle.number}</p>
@@ -32,13 +32,13 @@ const Users = () => {
                 </div>
               </Accordian.AccordianHeader>
               <Accordian.AccordianContent index={index}>
-                <div className="route-card-content-wrapper">
-                  <div className="route-card-content-data">
+                <div className="users-card-content-wrapper">
+                  <div className="users-card-content-data">
                     <p>{route.employee.display_name}</p>
                     <p>{route.address}</p>
                     <p>{new Date(route.eta).toString()}</p>
                   </div>
-                  <div className="route-card-content-buttons">
+                  <div className="uesrs-card-content-buttons">
                     <div>&#128465;</div>
                     <div>&#10021;</div>
                   </div>

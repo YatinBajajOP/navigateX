@@ -6,7 +6,7 @@ const initialState = {
 }
 
 export const RouteStore = createSlice({
-  name: 'counter',
+  name: 'routes',
   initialState,
   reducers: {
     set: (state, action) => state.routes = action.payload,
