@@ -1,28 +1,36 @@
-import { DB } from "./init"
+import { DB } from "../init"
 import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore"
+import { getUser } from "./users"
+import { getVehicle } from "./vehicle"
 
 const ROUTES = collection(DB, "route_data")
 
 export const getRoutes = async () => {
     const routes = await getDocs(ROUTES)
     let result = []
-    // routes.forEach(route => result.push(route.data()))
     routes.forEach(route => {
         const data = route.data()
         result.push({
             id: route.id,
             address: data.address,
-            driver: data.driver.id,
+            driver: data.driver,
             driver_location: {lat: data.driver_location?.latitude, long: data.driver_location?.longitude},
-            employee: data.employee.id,
+            employee: data.employee,
             eta: data.eta.toMillis(),
             locaion: {lat: data.location?.latitude, long: data.location?.longitude},
             name: data.name,
             shift: data.shift.toMillis(),
             status: data.status,
-            vehicle: data.vehicle.id
+            vehicle: data.vehicle
         })
     })
+    result = await Promise.all(result.map(async route => ({
+        ...route,
+        driver: await getUser(route.driver),
+        employee: await getUser(route.employee),
+        vehicle: await getVehicle(route.vehicle)
+    })))
+    console.log(result)
     return result
 }
 

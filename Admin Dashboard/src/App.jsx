@@ -1,10 +1,13 @@
-import Routes from './pages/Routes/Routes'
+import { BrowserRouter } from 'react-router-dom'
+import RootRouter from './routers/RootRouter'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
   return (
-    <>
-      <Routes />
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <RootRouter />
+    </BrowserRouter>
   )
 }
 

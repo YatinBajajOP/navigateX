@@ -1,11 +1,11 @@
 import Accordian from "../../components/Accordion/Accordian"
 import { useSelector } from "react-redux"
-import './Routes.css'
+import './Logs.css'
 import { useDispatch } from "react-redux"
 import { GET_ROUTES } from '../../redux/RouteStore/RouteStore.thunk';
 import { useEffect } from "react"
 
-const Routes = () => {
+const Logs = () => {
   const routes = useSelector((state) => state.routes.routes)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -52,4 +52,4 @@ const Routes = () => {
   )
 }
 
-export default Routes
+export default Logs

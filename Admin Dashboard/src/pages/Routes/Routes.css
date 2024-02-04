@@ -1,9 +1,9 @@
-.routes_wrapper{
+.routes_wrapper {
     padding: 3rem;
     font-size: 1.4rem;
 }
 
-.route{
+.route {
     display: flex;
     align-items: center;
     padding: 0.5rem 1rem;
@@ -12,9 +12,36 @@
     font-weight: bold;
 }
 
-.route_options{
+.route_options {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
+.route-card-content-wrapper,
+.route-card-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.route-card-header-wrapper {
+    flex: 1;
+}
+.route-card-content-data,
+.route-card-header-data {
+    display: flex;
+    gap: 3rem;
+    font-size: 1.5rem;
+}
+
+.route-card-content-data > p,
+.route-card-header-data > p {
+    min-width: 30ch;
+}
+
+.route-card-content-buttons,
+.route-card-header-buttons{
+    display: flex;
+    gap: 1rem;
+    font-size: 2rem;
+}
