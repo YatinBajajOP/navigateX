@@ -1,0 +1,14 @@
+nav{
+    display: flex;
+    padding: 0.5rem 1rem;
+    background-color:#006193;
+    justify-content: space-between;
+    color: var(--clr-white);
+    font-size: 1.6rem;
+}
+
+nav .nav_links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
