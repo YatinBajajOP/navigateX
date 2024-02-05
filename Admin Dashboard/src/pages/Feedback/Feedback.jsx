@@ -2,53 +2,49 @@ import Accordian from "../../components/Accordion/Accordian"
 import { useSelector } from "react-redux"
 import './Feedback.css'
 import { useDispatch } from "react-redux"
-import { GET_ROUTES } from '../../redux/RouteStore/RouteStore.thunk';
 import { useEffect } from "react"
+import { GET_FEEDBACKS } from "../../redux/FeedbackStore/FeedbackStore.thunk";
 
 const Feedback = () => {
-  const routes = useSelector((state) => state.routes.routes)
+  const feedbacks = useSelector((state) => state.feedbacks.feedbacks)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(GET_ROUTES())
+    dispatch(GET_FEEDBACKS())
   }, [])
   return (
-      <div className="routes_wrapper">
-        <Accordian >
-          {routes.map((route, index) => (
-            <div className="accordian-item" key={route.id}>
-              <Accordian.AccordianHeader index={index}>
+    <div className="routes_wrapper">
+      <Accordian >
+        {feedbacks.map((feedback, index) => (
+          <div className="accordian-item" key={feedback.id}>
+            <Accordian.AccordianHeader index={index}>
               <div className="route-card-header-wrapper">
-                  <div className="route-card-header-data">
-                    <p>{route.id}</p>
-                    <p>{route.name}</p>
-                    <p>{route.vehicle.number}</p>
-                    <p>{route.vehicle.seats} seater</p>
-                    <p>{route.vehicle.vendor}</p>
-                  </div>
-                  <div className="route-card-header-buttons">
-                    <div>&#128393;</div>
-                    <div>&#128465;</div>
-                  </div>
+                <div className="route-card-header-data">
+                  <p>{feedback?.id}</p>
+                  <p>{feedback?.given_by?.display_name}</p>
+                  <p>{feedback?.rating} star</p>
+                  <p>{feedback?.timestamp}</p>
                 </div>
-              </Accordian.AccordianHeader>
-              <Accordian.AccordianContent index={index}>
-                <div className="route-card-content-wrapper">
-                  <div className="route-card-content-data">
-                    <p>{route.employee.display_name}</p>
-                    <p>{route.address}</p>
-                    <p>{new Date(route.eta).toString()}</p>
-                  </div>
-                  <div className="route-card-content-buttons">
-                    <div>&#128465;</div>
-                    <div>&#10021;</div>
-                  </div>
+                <div className="route-card-header-buttons">
+                  <div>&#128393;</div>
+                  <div>&#128465;</div>
                 </div>
-
-              </Accordian.AccordianContent>
-            </div>
-          ))}
-        </Accordian>
-      </div>
+              </div>
+            </Accordian.AccordianHeader>
+            {
+              feedback.feedback
+                ? (<Accordian.AccordianContent index={index}>
+                  <div className="route-card-content-wrapper">
+                    <div className="route-card-content-data">
+                      <p>{feedback?.feedback}</p>
+                    </div>
+                  </div>
+                </Accordian.AccordianContent>)
+                : null
+            }
+          </div>
+        ))}
+      </Accordian>
+    </div>
   )
 }
 

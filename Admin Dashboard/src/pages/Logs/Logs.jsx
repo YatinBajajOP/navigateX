@@ -12,19 +12,19 @@ const Logs = () => {
     dispatch(GET_LOGS())
   }, [])
   return (
-      <div className="routes_wrapper">
+      <div className="logs_wrapper">
         <Accordian >
           {logs.map((log, index) => (
             <div className="accordian-item" key={log.id}>
               <Accordian.AccordianHeader index={index}>
-              <div className="route-card-header-wrapper">
-                  <div className="route-card-header-data">
-                    <p>{log.action}</p>
-                    <p>{log.taken_by?.display_name}</p>
-                    <p>{log.target?.display_name}</p>
-                    <p>{new Date(log.timestamp).toString()}</p>
+              <div className="logs-card-header-wrapper">
+                  <div className="logs-card-header-data">
+                    <p>{log?.action}</p>
+                    <p>{log?.taken_by?.display_name}</p>
+                    <p>{log?.target?.display_name}</p>
+                    <p>{new Date(log?.timestamp).toLocaleString()}</p>
                   </div>
-                  <div className="route-card-header-buttons">
+                  <div className="logs-card-header-buttons">
                     <div>&#128393;</div>
                     <div>&#128465;</div>
                   </div>
