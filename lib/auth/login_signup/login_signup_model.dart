@@ -1,5 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -29,34 +28,11 @@ class LoginSignupModel extends FlutterFlowModel<LoginSignupWidget> {
   TextEditingController? passwordController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordControllerValidator;
-  // State field(s) for Name widget.
-  FocusNode? nameFocusNode;
-  TextEditingController? nameController;
-  String? Function(BuildContext, String?)? nameControllerValidator;
-  // State field(s) for emailAddress-Create widget.
-  FocusNode? emailAddressCreateFocusNode;
-  TextEditingController? emailAddressCreateController;
-  String? Function(BuildContext, String?)?
-      emailAddressCreateControllerValidator;
-  // State field(s) for password-Create widget.
-  FocusNode? passwordCreateFocusNode;
-  TextEditingController? passwordCreateController;
-  late bool passwordCreateVisibility;
-  String? Function(BuildContext, String?)? passwordCreateControllerValidator;
-  // State field(s) for rpassword-Create widget.
-  FocusNode? rpasswordCreateFocusNode;
-  TextEditingController? rpasswordCreateController;
-  late bool rpasswordCreateVisibility;
-  String? Function(BuildContext, String?)? rpasswordCreateControllerValidator;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     passwordVisibility = false;
-    passwordCreateVisibility = false;
-    rpasswordCreateVisibility = false;
   }
 
   void dispose() {
@@ -67,18 +43,6 @@ class LoginSignupModel extends FlutterFlowModel<LoginSignupWidget> {
 
     passwordFocusNode?.dispose();
     passwordController?.dispose();
-
-    nameFocusNode?.dispose();
-    nameController?.dispose();
-
-    emailAddressCreateFocusNode?.dispose();
-    emailAddressCreateController?.dispose();
-
-    passwordCreateFocusNode?.dispose();
-    passwordCreateController?.dispose();
-
-    rpasswordCreateFocusNode?.dispose();
-    rpasswordCreateController?.dispose();
   }
 
   /// Action blocks are added here.

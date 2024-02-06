@@ -88,51 +88,55 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : LoginSignupWidget(),
         ),
         FFRoute(
-          name: 'home_page',
+          name: 'HomePage',
           path: '/homePage',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'home_page')
+              ? NavBarPage(initialPage: 'HomePage')
               : HomePageWidget(),
         ),
         FFRoute(
-          name: 'navigate',
+          name: 'Navigate',
           path: '/navigate',
           builder: (context, params) => NavigateWidget(),
         ),
         FFRoute(
-          name: 'login_signup',
+          name: 'LoginSignup',
           path: '/loginSignup',
           builder: (context, params) => LoginSignupWidget(),
         ),
         FFRoute(
-          name: 'profile',
+          name: 'Profile',
           path: '/profile',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profile')
+              ? NavBarPage(initialPage: 'Profile')
               : ProfileWidget(),
         ),
         FFRoute(
-          name: 'route_details',
+          name: 'RouteDetails',
           path: '/routeDetails',
           builder: (context, params) => RouteDetailsWidget(),
         ),
         FFRoute(
           name: 'RouteInfo',
           path: '/routeInfo',
-          builder: (context, params) => RouteInfoWidget(),
+          builder: (context, params) => RouteInfoWidget(
+            routeNumber: params.getParam('routeNumber', ParamType.String),
+            driverDoc: params.getParam(
+                'driverDoc', ParamType.DocumentReference, false, ['users']),
+          ),
         ),
         FFRoute(
-          name: 'liveLocation',
+          name: 'LiveLocation',
           path: '/liveLocation',
           builder: (context, params) => LiveLocationWidget(),
         ),
         FFRoute(
-          name: 'feedback',
+          name: 'Feedback',
           path: '/feedback',
           builder: (context, params) => FeedbackWidget(),
         ),
         FFRoute(
-          name: 'pickup_verification',
+          name: 'PickupVerification',
           path: '/pickupVerification',
           asyncParams: {
             'routeID': getDoc(['route_data'], RouteDataRecord.fromSnapshot),

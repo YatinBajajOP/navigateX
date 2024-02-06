@@ -75,7 +75,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 context.pushNamed(
-                  'pickup_verification',
+                  'PickupVerification',
                   queryParameters: {
                     'routeID': serializeParam(
                       widget.routeDocument,
@@ -103,7 +103,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                       fontFamily: 'Roboto',
                       color: FlutterFlowTheme.of(context).success,
                       fontSize: 24.0,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
             ),
@@ -136,7 +136,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                 widget.routeDocument?.employee,
               );
               if (widget.routeFinished) {
-                context.pushNamed('feedback');
+                context.pushNamed('Feedback');
 
                 await actions.log(
                   'PICKUPS_COMPLETED',
@@ -154,7 +154,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                     fontFamily: 'Roboto',
                     color: FlutterFlowTheme.of(context).error,
                     fontSize: 24.0,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                   ),
             ),
           ),
@@ -172,7 +172,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
             highlightColor: Colors.transparent,
             onTap: () async {
               context.pushNamed(
-                'pickup_verification',
+                'PickupVerification',
                 queryParameters: {
                   'routeID': serializeParam(
                     widget.routeDocument,
@@ -200,7 +200,7 @@ class _RouteStatusWidgetState extends State<RouteStatusWidget> {
                     fontFamily: 'Roboto',
                     color: FlutterFlowTheme.of(context).warning,
                     fontSize: 24.0,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                   ),
             ),
           ),

@@ -289,7 +289,7 @@ class _PickupVerificationWidgetState extends State<PickupVerificationWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if (_model.pinCodeController!.text ==
-                                        '000000') {
+                                        widget.routeID?.otp) {
                                       unawaited(
                                         () async {
                                           await widget.routeID!.reference
@@ -305,10 +305,10 @@ class _PickupVerificationWidgetState extends State<PickupVerificationWidget> {
                                         widget.routeID?.employee,
                                       );
 
-                                      context.pushNamed('home_page');
+                                      context.pushNamed('HomePage');
 
                                       if (widget.routeCompleted) {
-                                        context.pushNamed('feedback');
+                                        context.pushNamed('Feedback');
 
                                         await actions.log(
                                           'PICKUPS_COMPLETED',
