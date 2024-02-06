@@ -12,42 +12,46 @@ const Routes = () => {
     dispatch(GET_ROUTES())
   }, [])
   return (
-      <div className="routes_wrapper">
-        <Accordian >
-          {routes.map((route, index) => (
-            <div className="accordian-item" key={route.id}>
-              <Accordian.AccordianHeader index={index}>
+    <div className="routes_wrapper">
+      <Accordian >
+        {Object.keys(routes).map((route, index) => (
+          <div className="accordian-item" key={route}>
+            <Accordian.AccordianHeader index={index}>
               <div className="route-card-header-wrapper">
-                  <div className="route-card-header-data">
-                    <p>{route?.id}</p>
-                    <p>{route?.name}</p>
-                    <p>{route?.vehicle?.number}</p>
-                    <p>{route?.vehicle?.seats} seater</p>
-                    <p>{route?.vehicle?.vendor}</p>
-                  </div>
-                  <div className="route-card-header-buttons">
-                    <div>&#128393;</div>
-                    <div>&#128465;</div>
-                  </div>
+                <div className="route-card-header-data">
+                  <p>{routes[route]?.at(0)?.id}</p>
+                  <p>{routes[route]?.at(0)?.driver?.display_name}</p>
+                  <p>{routes[route]?.at(0)?.vehicle?.number}</p>
+                  <p>{routes[route]?.at(0)?.vehicle?.seats} seater</p>
+                  <p>{routes[route]?.at(0)?.vehicle?.vendor}</p>
                 </div>
-              </Accordian.AccordianHeader>
-              <Accordian.AccordianContent index={index}>
-                <div className="route-card-content-wrapper">
-                  <div className="route-card-content-data">
-                    <p>{route?.employee?.display_name}</p>
-                    <p>{route?.address}</p>
-                    <p>{new Date(route.eta).toLocaleString()}</p>
-                  </div>
-                  <div className="route-card-content-buttons">
-                    <div>&#128465;</div>
-                    <div>&#10021;</div>
-                  </div>
+                <div className="route-card-header-buttons">
+                  <div>&#128393;</div>
+                  <div>&#128465;</div>
                 </div>
-              </Accordian.AccordianContent>
-            </div>
-          ))}
-        </Accordian>
-        </div>
+              </div>
+            </Accordian.AccordianHeader>
+            <Accordian.AccordianContent index={index}>
+              {
+                routes[route].map(employee => (
+                  <div className="route-card-content-wrapper" key={employee.id}>
+                    <div className="route-card-content-data">
+                      <p>{employee?.employee.display_name}</p>
+                      <p>{employee?.employee.address}</p>
+                      <p>{new Date(employee?.eta).toLocaleString()}</p>
+                    </div>
+                    <div className="route-card-content-buttons">
+                      <div>&#128465;</div>
+                      <div>&#10021;</div>
+                    </div>
+                  </div>
+                ))
+              }
+            </Accordian.AccordianContent>
+          </div>
+        ))}
+      </Accordian>
+    </div>
   )
 }
 

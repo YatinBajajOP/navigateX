@@ -19,11 +19,11 @@ const Users = () => {
                     <div className="card-item" key={user.id}>
                         <div className="card-item-index" index={index}>
                             <div className="card-item-content">
-                                <p>{user.id}</p>
-                                <p>{user.display_name}</p>
-                                <p>{user.email}</p>
-                                <p>{user.created_time}</p>
-                                <p>{user.isDriver ? "Driver" : "Employee"}</p>
+                                <p>{user?.id}</p>
+                                <p>{user?.display_name}</p>
+                                <p>{user?.email}</p>
+                                <p>{user?.created_time}</p>
+                                <p>{user?.isDriver ? "Driver" : "Employee"}</p>
                             </div>
                         </div>
                     </div>))}

@@ -19,6 +19,7 @@ export const getLogs = async (ref) => {
         ...log.data(),
         id: log.id
     }))
+    console.log(logs_data)
     logs_data = await Promise.all(logs_data.map(async log => ({
         id: log.id,
         action: log.action,

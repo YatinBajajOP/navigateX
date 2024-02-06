@@ -30,8 +30,12 @@ export const getRoutes = async () => {
         employee: await getUser(route.employee),
         vehicle: await getVehicle(route.vehicle)
     })))
-    console.log(result)
-    return result
+    let res = {}
+    result.forEach(route => {
+        if(res[`${route?.driver?.id}${new Date(route?.shift).toLocaleString()}`] instanceof Array) res[`${route?.driver?.id}${new Date(route?.shift).toLocaleString()}`].push(route)
+        else res[`${route?.driver?.id}${new Date(route?.shift).toLocaleString()}`] = [route]
+    })
+    return res
 }
 
 // export const updateUser = async (user, data) => {

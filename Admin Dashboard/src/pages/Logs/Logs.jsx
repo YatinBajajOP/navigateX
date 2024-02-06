@@ -17,8 +17,8 @@ const Logs = () => {
           {logs.map((log, index) => (
             <div className="accordian-item" key={log.id}>
               <Accordian.AccordianHeader index={index}>
-              <div className="logs-card-header-wrapper">
-                  <div className="logs-card-header-data">
+              <div className="logs-card-header-wrapper" style={log?.action==='PANIC_BUTTON_PRESSED'?{backgroundColor:' #ff3333', color:'white', padding:' 0.5rem'}:null}>
+                  <div className="logs-card-header-data" >
                     <p>{log?.action}</p>
                     <p>{log?.taken_by?.display_name}</p>
                     <p>{log?.target?.display_name}</p>

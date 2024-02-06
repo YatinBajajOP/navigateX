@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { GET_ROUTES } from './RouteStore.thunk'
 
 const initialState = {
-  routes: []
+  routes: {}
 }
 
 export const RouteStore = createSlice({
