@@ -1,0 +1,52 @@
+.accordian-card-header-wrapper{
+    background-color: red;
+    padding: 0 1rem;
+}
+
+.logs_wrapper {
+    padding: 3rem;
+    font-size: 1.4rem;
+}
+
+.logs {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.logs_options {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logs-card-content-wrapper,
+.logs-card-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logs-card-header-wrapper {
+    flex: 1;
+}
+.logs-card-content-data,
+.logs-card-header-data {
+    display: flex;
+    gap: 3rem;
+    font-size: 1.5rem;
+}
+
+.logs-card-content-data > p,
+.logs-card-header-data > p {
+    min-width: 30ch;
+}
+
+.logs-card-content-buttons,
+.logs-card-header-buttons{
+    display: flex;
+    gap: 1rem;
+    font-size: 2rem;
+}
