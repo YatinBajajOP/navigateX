@@ -13,6 +13,20 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "route_data",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "employee",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "shift",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ]
 }

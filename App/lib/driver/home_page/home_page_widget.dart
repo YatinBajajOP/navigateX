@@ -37,7 +37,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (!valueOrDefault<bool>(currentUserDocument?.isDriver, false)) {
-        context.pushNamed('route_details');
+        context.goNamed('RouteDetails');
       }
     });
   }
@@ -357,163 +357,150 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor: Color(0xFFE0E3E7),
-                                                borderRadius: 8.0,
-                                                borderWidth: 2.0,
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.call,
-                                                  color: Color(0xFF57636C),
-                                                  size: 20.0,
-                                                ),
-                                                onPressed: () async {
-                                                  await actions.log(
-                                                    'EMPLOYEE_CALLED',
-                                                    currentUserReference!,
-                                                    routesItem.employee,
-                                                  );
-                                                  // CALL EMPLOYEE
-                                                },
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor: Color(0xFFE0E3E7),
-                                                borderRadius: 8.0,
-                                                borderWidth: 2.0,
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.location_on,
-                                                  color: Color(0xFF57636C),
-                                                  size: 20.0,
-                                                ),
-                                                onPressed: () async {
-                                                  await actions.log(
-                                                    'NAVIGATION_STARTED',
-                                                    currentUserReference!,
-                                                    routesItem.employee,
-                                                  );
-                                                  await launchMap(
-                                                    location:
-                                                        routesItem.location,
-                                                    title: '',
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                              child: FlutterFlowIconButton(
-                                                borderColor: Color(0xFFE0E3E7),
-                                                borderRadius: 8.0,
-                                                borderWidth: 2.0,
-                                                buttonSize: 40.0,
-                                                icon: Icon(
-                                                  Icons.more_vert,
-                                                  color: Color(0xFF57636C),
-                                                  size: 20.0,
-                                                ),
-                                                onPressed: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Color(0x00F6F6F6),
-                                                    barrierColor:
-                                                        Color(0x001C1212),
-                                                    useSafeArea: true,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height: MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .height *
-                                                                0.2,
-                                                            child:
-                                                                RouteStatusWidget(
-                                                              routeDocument:
-                                                                  routesItem,
-                                                              routeFinished: containerRouteDataRecordList
-                                                                          .where((e) =>
-                                                                              (e.status == null || e.status == '') &&
-                                                                              (dateTimeFormat('Hm', e.shift) == dateTimeFormat('Hm', functions.getShiftTime(containerRouteDataRecordList.toList()))))
-                                                                          .toList()
-                                                                          .length ==
-                                                                      1
-                                                                  ? true
-                                                                  : false,
-                                                            ),
-                                                          ),
-                                                        ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 4.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Color(0xFFE0E3E7),
+                                                    borderRadius: 8.0,
+                                                    borderWidth: 2.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.location_on,
+                                                      color: Color(0xFF57636C),
+                                                      size: 20.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      await actions.log(
+                                                        'NAVIGATION_STARTED',
+                                                        currentUserReference!,
+                                                        routesItem.employee,
+                                                      );
+                                                      await launchMap(
+                                                        location:
+                                                            routesItem.location,
+                                                        title:
+                                                            routesItem.address,
                                                       );
                                                     },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                              ),
-                                            ),
-                                            if (routesItem.status != null &&
-                                                routesItem.status != '')
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 4.0, 0.0),
-                                                child: FlutterFlowIconButton(
-                                                  borderColor:
-                                                      Color(0xFFE0E3E7),
-                                                  borderRadius: 8.0,
-                                                  borderWidth: 2.0,
-                                                  buttonSize: 40.0,
-                                                  icon: Icon(
-                                                    Icons.circle,
-                                                    color: () {
-                                                      if (routesItem.status ==
-                                                          'Pick up') {
-                                                        return FlutterFlowTheme
-                                                                .of(context)
-                                                            .success;
-                                                      } else if (routesItem
-                                                              .status ==
-                                                          'No Show') {
-                                                        return FlutterFlowTheme
-                                                                .of(context)
-                                                            .error;
-                                                      } else {
-                                                        return FlutterFlowTheme
-                                                                .of(context)
-                                                            .warning;
-                                                      }
-                                                    }(),
-                                                    size: 20.0,
                                                   ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'IconButton pressed ...');
-                                                  },
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 4.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Color(0xFFE0E3E7),
+                                                    borderRadius: 8.0,
+                                                    borderWidth: 2.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.more_vert,
+                                                      color: Color(0xFF57636C),
+                                                      size: 20.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Color(0x00F6F6F6),
+                                                        barrierColor:
+                                                            Color(0x001C1212),
+                                                        useSafeArea: true,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () => _model
+                                                                    .unfocusNode
+                                                                    .canRequestFocus
+                                                                ? FocusScope.of(
+                                                                        context)
+                                                                    .requestFocus(
+                                                                        _model
+                                                                            .unfocusNode)
+                                                                : FocusScope.of(
+                                                                        context)
+                                                                    .unfocus(),
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child: Container(
+                                                                height: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .height *
+                                                                    0.2,
+                                                                child:
+                                                                    RouteStatusWidget(
+                                                                  routeDocument:
+                                                                      routesItem,
+                                                                  routeFinished:
+                                                                      containerRouteDataRecordList.where((e) => (e.status == null || e.status == '') && (dateTimeFormat('Hm', e.shift) == dateTimeFormat('Hm', functions.getShiftTime(containerRouteDataRecordList.toList())))).toList().length ==
+                                                                              1
+                                                                          ? true
+                                                                          : false,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          safeSetState(() {}));
+                                                    },
+                                                  ),
+                                                ),
+                                                if (routesItem.status != null &&
+                                                    routesItem.status != '')
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                4.0, 0.0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Color(0xFFE0E3E7),
+                                                      borderRadius: 8.0,
+                                                      borderWidth: 2.0,
+                                                      buttonSize: 40.0,
+                                                      icon: Icon(
+                                                        Icons.circle,
+                                                        color: () {
+                                                          if (routesItem
+                                                                  .status ==
+                                                              'Pick up') {
+                                                            return FlutterFlowTheme
+                                                                    .of(context)
+                                                                .success;
+                                                          } else if (routesItem
+                                                                  .status ==
+                                                              'No Show') {
+                                                            return FlutterFlowTheme
+                                                                    .of(context)
+                                                                .error;
+                                                          } else {
+                                                            return FlutterFlowTheme
+                                                                    .of(context)
+                                                                .warning;
+                                                          }
+                                                        }(),
+                                                        size: 20.0,
+                                                      ),
+                                                      onPressed: () {
+                                                        print(
+                                                            'IconButton pressed ...');
+                                                      },
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ),

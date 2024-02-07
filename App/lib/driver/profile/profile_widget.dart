@@ -59,7 +59,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           style: FlutterFlowTheme.of(context).displaySmall.override(
                 fontFamily: 'Roboto',
                 color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 28.0,
+                fontSize: 24.0,
               ),
         ),
         actions: [],
@@ -77,93 +77,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      currentUserEmail,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Roboto',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 0.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                      offset: Offset(0.0, 1.0),
-                    )
-                  ],
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 12.0),
-                  child: Text(
-                    'My Account Information',
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                  Text(
+                    currentUserEmail,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Roboto',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          fontSize: 18.0,
                         ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-              child: Container(
-                width: double.infinity,
-                height: 70.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 0.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                      offset: Offset(0.0, 1.0),
-                    )
-                  ],
-                  shape: BoxShape.rectangle,
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Change Password',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Roboto',
-                                    ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                ],
               ),
             ),
             Padding(
@@ -200,7 +122,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('feedback');
+                  context.pushNamed('Feedback');
                 },
                 child: Container(
                   width: double.infinity,
@@ -256,57 +178,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-              child: Container(
-                width: double.infinity,
-                height: 70.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 0.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                      offset: Offset(0.0, 1.0),
-                    )
-                  ],
-                  shape: BoxShape.rectangle,
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Submit a Feature Request',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Roboto',
-                                    ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -322,7 +194,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      context.goNamedAuth('login_signup', context.mounted);
+                      context.goNamedAuth('LoginSignup', context.mounted);
                     },
                     text: 'Log Out',
                     options: FFButtonOptions(
