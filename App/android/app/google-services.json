@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:316138372846:android:c256f1f0f79317873cbdff",
         "android_client_info": {
-          "package_name": "com.flutterflow.edriveapp"
+          "package_name": "com.org.fil.etmsapp"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "316138372846-m8mutp8tk671nfan7ubadglm69ga3p92.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.flutterflow.edriveapp"
+                "bundle_id": "com.org.fil.etmsapp"
               }
             }
           ]
