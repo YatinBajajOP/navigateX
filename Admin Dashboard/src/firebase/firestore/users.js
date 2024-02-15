@@ -2,6 +2,12 @@ import { DB } from "../init"
 import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore"
 
 const USERS = collection(DB, "users")
+
+export const createUserDocument = async (id) => {
+    const ref = doc(USERS, id)
+    return await setDoc(ref, { createdAt: new Date() })
+}
+
 export const getUser = async (ref) => {
     if(!ref) return null
     try{
@@ -17,7 +23,6 @@ export const getUser = async (ref) => {
     }
 }
 
-
 export const getUsers = async () => {
     const users= await getDocs(USERS);
     let result = []
@@ -32,4 +37,4 @@ export const getUsers = async () => {
     });
     console.log(result)
     return result
-} 
+}
