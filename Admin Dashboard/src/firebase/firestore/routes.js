@@ -51,12 +51,12 @@ export const updateRoute = async (route, data) => {
     return setDoc(ref, data, {merge : true})
 }
 
-export const deleteUserFromRoute = (route_user) => {
+export const deleteUserFromRoute = async (route_user) => {
   await deleteDoc(doc(ROUTES, route_user.id))
 }
 
 export const deleteRoute = async (route) => {
-    await Promise.all(route.map(user => await deleteDoc(doc(ROUTES, user.id)))
+    await Promise.all(route.map(async user => await deleteDoc(doc(ROUTES, user.id))))
 }
 
 export const deleteRoutes = async (routes) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Accordian from "../../components/Accordion/Accordian";
 import { GET_ROUTES } from "../../redux/RouteStore/RouteStore.thunk";
-import { deleteRoute } from "../../firebase/firestore/routes";
+import { deleteRoute, deleteUserFromRoute } from "../../firebase/firestore/routes";
 import "./Routes.css";
 
 const Routes = () => {
@@ -13,8 +13,13 @@ const Routes = () => {
     dispatch(GET_ROUTES());
   }, []);
 
-  const handleSubmit = async () => {
-    console.log(1)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+    const file = form.file.files[0]
+    const reader = new FileReader()
+    reader.addEventListener('load', (e) => {console.log(e.target.result)});
+    reader.readAsText(file)
   }
   
   return (
@@ -63,7 +68,10 @@ const Routes = () => {
       {modalOpen ? (
         <div className="routes-add-modal">
           <form onSubmit={handleSubmit}>
-            <input type="file" />
+            <div className="form-close-btn" onClick={() => setModalOpen(false)} >X</div>
+              <input type="file" id='routes-file-input' style={{display: 'none'}} name='file'/>
+              <label htmlFor="routes-file-input" style={{width: '80%', border: '1px dashed black', display: 'grid', placeItems: 'center', height: '80%', margin: 'auto'}} >Click here to import file</label>
+              <button>Submit</button>
           </form>
         </div>
       ) : null}

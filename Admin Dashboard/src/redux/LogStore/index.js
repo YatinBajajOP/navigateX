@@ -17,7 +17,7 @@ export const LogStore = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(GET_LOGS.fulfilled, (state, action) => {
-      state.logs = action.payload
+      state.logs = action.payload || []
     })
   },
 })

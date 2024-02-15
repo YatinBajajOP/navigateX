@@ -11,10 +11,11 @@ const Logs = () => {
   useEffect(() => {
     dispatch(GET_LOGS())
   }, [])
+  console.log(logs)
   return (
       <div className="logs_wrapper">
         <Accordian >
-          {logs.map((log, index) => (
+          {logs?.map((log, index) => (
             <div className="accordian-item" key={log.id}>
               <Accordian.AccordianHeader index={index}>
               <div className="logs-card-header-wrapper" style={log?.action==='PANIC_BUTTON_PRESSED'?{backgroundColor:' #ff3333', color:'white', padding:' 0.5rem'}:null}>

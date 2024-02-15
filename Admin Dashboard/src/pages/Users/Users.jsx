@@ -15,11 +15,11 @@ const Users = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        createUser(e.target.email, )
+        createUser(e.target.email,)
     }
     return (
         <>
-            <div style={{ margin: '1rem auto 0.6rem', padding: '1rem 2rem', backgroundColor: 'var(--clr-primary)', color: 'white', width: 'fit-content', cursor: 'pointer' }} onClick={() => setModalOpen(true)} >Add User</div>
+            <div className="Add-User-btn" onClick={() => setModalOpen(true)} >Add User</div>
             <div className="container">
                 <div className="user_wrapper">
                     {users.map((user, index) => (
@@ -38,16 +38,21 @@ const Users = () => {
             </div>
             {
                 modalOpen
-                ? (<div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgb(0,0,0,0.7)', display: 'grid', placeItems: 'center' }}>
-                    <form style={{ display: 'flex', padding: '1rem', flexDirection: 'column', gap: '1rem', alignItems: 'center', color: 'white' }} onSubmit={handleSubmit} >
-                        <p style={{cursor: 'pointer'}} onClick={() => setModalOpen(false)}>X</p>
-                        <input type='text' name='name' placeholder="Full Name" />
-                        <label htmlFor="isDriver">Is a driver</label>
-                        <input type='checkbox' name='isDriver' id='isDriver' value='true' />
-                        <input type='text' name='email' placeholder="email Id" />
-                    </form>
-                </div>)
-                : null
+                    ? (<div className="Add-User-Modal">
+                        <form onSubmit={handleSubmit} >
+                            <p onClick={() => setModalOpen(false)}>X</p>
+
+                            <div className="input-wrapper">
+                                <input type='text' name='name' placeholder="Full Name" />
+                                <div className="driver-check">
+                                    <label htmlFor="isDriver">Is a driver</label>
+                                    <input type='checkbox' name='isDriver' id='isDriver' value='true' />
+                                </div>
+                                <input type='email' name='email' placeholder="email Id" />
+                            </div>
+                        </form>
+                    </div>)
+                    : null
             }
         </>
     )
