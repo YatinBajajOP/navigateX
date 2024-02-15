@@ -1,5 +1,5 @@
 import { DB } from "../init"
-import { doc, getDoc, getDocs, collection, setDoc, deleteDoc } from "firebase/firestore"
+import { doc, getDoc, getDocs, collection, setDoc, deleteDoc, query } from "firebase/firestore"
 import { getUser } from "./users"
 import { getVehicle } from "./vehicle"
 
@@ -7,6 +7,10 @@ const ROUTES = collection(DB, "route_data")
 
 export const createRoute = async (data) => {
     return await setDoc(doc(ROUTES), data)
+}
+
+export const createRoutes = async (routes) => {
+  await Promise.all(routes.map(async route => await setDoc(doc(ROUTES), route)))
 }
 
 export const getRoutes = async () => {
@@ -47,12 +51,16 @@ export const updateRoute = async (route, data) => {
     return setDoc(ref, data, {merge : true})
 }
 
+export const deleteUserFromRoute = (route_user) => {
+  await deleteDoc(doc(ROUTES, route_user.id))
+}
+
 export const deleteRoute = async (route) => {
-    return await deleteDoc(doc(ROUTES, route.id))
+    await Promise.all(route.map(user => await deleteDoc(doc(ROUTES, user.id)))
 }
 
 export const deleteRoutes = async (routes) => {
-    await Promise.all(routes.map(async route => await removeDoc(doc(ROUTES, route.id))))
+    await Promise.all(routes.map(async route => await deleteDoc(doc(ROUTES, route.id))))
 }
 
 // export const getData = async (ref) => {

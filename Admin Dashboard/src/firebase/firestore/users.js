@@ -3,9 +3,9 @@ import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore"
 
 const USERS = collection(DB, "users")
 
-export const createUserDocument = async (id) => {
+export const createUserDocument = async (id, user) => {
     const ref = doc(USERS, id)
-    return await setDoc(ref, { createdAt: new Date() })
+    return await setDoc(ref, user)
 }
 
 export const getUser = async (ref) => {
@@ -19,8 +19,19 @@ export const getUser = async (ref) => {
     }
     catch(e){
         console.log(e)
-        return 0;
+        return {};
     }
+}
+
+export const getUserById = async (id) => {
+  if(!id) return
+  try{
+    const user = await getDoc(doc(USERS, id))
+    user
+  } catch(e) {
+    console.log(e)
+    return null
+  }
 }
 
 export const getUsers = async () => {
