@@ -1,9 +1,13 @@
 import { DB } from "../init"
-import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore"
+import { doc, getDoc, getDocs, collection, setDoc, deleteDoc } from "firebase/firestore"
 import { getUser } from "./users"
 import { getVehicle } from "./vehicle"
 
 const ROUTES = collection(DB, "route_data")
+
+export const createRoute = async (data) => {
+    return await setDoc(doc(ROUTES), data)
+}
 
 export const getRoutes = async () => {
     const routes = await getDocs(ROUTES)
@@ -38,10 +42,18 @@ export const getRoutes = async () => {
     return res
 }
 
-// export const updateUser = async (user, data) => {
-//     const ref = doc(USERS, user.uid)
-//     return setDoc(ref, data, {merge : true})
-// }
+export const updateRoute = async (route, data) => {
+    const ref = doc(ROUTES, route.id)
+    return setDoc(ref, data, {merge : true})
+}
+
+export const deleteRoute = async (route) => {
+    return await deleteDoc(doc(ROUTES, route.id))
+}
+
+export const deleteRoutes = async (routes) => {
+    await Promise.all(routes.map(async route => await removeDoc(doc(ROUTES, route.id))))
+}
 
 // export const getData = async (ref) => {
 //     return getDoc(ref)
@@ -68,18 +80,18 @@ export const getRoutes = async () => {
 //     }
 // }
 
-export const userSwiped = async (user, swiped, col) => {
-    return setDoc(doc(db, "users", user.uid, col, swiped.id), swiped)
-}
+// export const userSwiped = async (user, swiped, col) => {
+//     return setDoc(doc(db, "users", user.uid, col, swiped.id), swiped)
+// }
 
-export const match = async (user, id) => {
-    return getDoc(doc(db, "users", id, "MATCH", user.uid))
-}
+// export const match = async (user, id) => {
+//     return getDoc(doc(db, "users", id, "MATCH", user.uid))
+// }
 
-export const getPandM = async (user, col) => {
-    return getDocs(collection(db, "users", user.uid, col))
-}
+// export const getPandM = async (user, col) => {
+//     return getDocs(collection(db, "users", user.uid, col))
+// }
 
-export const createChat = async (id, data) => {
-    return setDoc(doc(db, "chat", id), data)
-}
+// export const createChat = async (id, data) => {
+//     return setDoc(doc(db, "chat", id), data)
+// }
