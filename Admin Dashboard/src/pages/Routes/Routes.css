@@ -1,3 +1,10 @@
+.routes-import-btn{
+  padding: 1rem 2rem;
+  margin: auto;
+  background-color: var(--clr-primary)
+  cursor: pointer;
+}
+
 .routes_wrapper {
     padding: 2rem;
     font-size: 1.4rem;
@@ -44,4 +51,16 @@
     display: flex;
     gap: 1rem;
     font-size: 2rem;
+}
+
+.routes-add-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgb(0,0,0,0.7);
+  backdrop-filter: blur(1rem);
 }
