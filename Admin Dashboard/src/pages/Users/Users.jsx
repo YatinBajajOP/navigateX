@@ -15,7 +15,7 @@ const Users = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        createUser(e.target.email,)
+        // createUser(e.target.email,)
     }
     return (
         <>
@@ -44,11 +44,13 @@ const Users = () => {
 
                             <div className="input-wrapper">
                                 <input type='text' name='name' placeholder="Full Name" />
-                                <div className="driver-check">
-                                    <label htmlFor="isDriver">Is a driver</label>
+                                <label className="driver-check" htmlFor="isDriver">
+                                    <p>Is a Driver</p>
                                     <input type='checkbox' name='isDriver' id='isDriver' value='true' />
-                                </div>
-                                <input type='email' name='email' placeholder="email Id" />
+                                </label>
+                                <input type='email' name='email' placeholder="Email Id" />
+                                <input type='password' name='passwoord' placeholder="Password" />
+                                <button>Submit</button>
                             </div>
                         </form>
                     </div>)

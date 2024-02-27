@@ -22,8 +22,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --clr-primary: blue;
-  --clr-secondary: red;
+  --clr-primary: #006193;
+  --clr-secondary: #B72F2A;
+  --clr-accent: #4AA00F;
   --clr-black: black;
   --clr-white: white;
 }
