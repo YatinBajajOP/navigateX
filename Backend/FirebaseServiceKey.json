@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "navigatex-improvathon",
+  "private_key_id": "35062b610f45f60ed068a50940475ba8933eff37",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD4OA5bBSjcz8r4\n8JEowWB87ezPt5j8zubRV7SwNaCNuK8RrSGOzhvOLQFrjLJrjrSsroYvTleAHXi8\nE3J2a8iDD69pgNIyUrSjWogRNHpC17igayg8bT36kehAWw4UigxdhQuPyLs//9jj\nYh2dlSVbS3n0j1VgY6e/78UeaJJ712NEmhmTBrGzn0JO1MfmNf8S/zrbwT18GHuG\nSjTDTKREbSeOryctItHEP8mBwuR/AzZQpC/TsulVQRiHLoXXpnKshaGiLUl7qma4\nBjysfydQEJtW/nagYd1pDbZGuVgS24I1V+0cdGj9c5Sl5iVeoQ+9kDkhO4xVggpw\njIjna8Q7AgMBAAECggEANI0RpP2TqCQqEchEwz8loW1x7IwvTJ61SW7rJz9DTZ3j\nGrfv2d8TDfSDT3TLNXBSGhkc+Zj5d3tF23O2kRHCstS4S3rlhZfy/H6nPhVBKTOo\nt/XX3+s06v7HEBD3Cywq8AXB6+AQnL0a+xEDuiAgd5KkMD3EUpLmqgEmV4jGMod9\nlD5n5ZSEEaw6E/kYZ4PAJU8Ted31RZGGSw0eulcyE4oxWLztTKswZq/Bp6aaukFi\nvJgAb2aOSNP83zh+Gs3STcmvjqgZM7+ih5ZQ7ZCOFL9et9Ql5ILqmGvYdK7pK3wq\n6RCLmIW8YJLl3ddw8ajFR7CjsE2RkgYUntteki796QKBgQD9mO+4jG+7gXuRCGEr\n99n7CZvY0lPruNh5Eks0U28OcCdwsMRJ4RqhvBeRTVoO+ku/XcBGM9Zp5+jgWr0o\nurV74JgOibVdJpnNwpK5E/70DZNR1n+aCznVktPZaAayjK9nMtPhKGwoqpFcwNfW\nWqtix+ND3syb8lQiEbiJgLtoxQKBgQD6khM2PUmkcDz5ZPJuN9OGjdcEEdnS7LGJ\nqnRG307FZjqXPntnknd/dp32ylVFBF+MY3rRe91aL+GR8xxNF7PkHQ4KgCXbsVtj\n9wpymuPzLPx+j8/Yh6K+GkNd9TzOZytXfHJJASmvcfL7Tus9AYeLxvqgoNumwlpq\nr+ZK6JtI/wKBgQCwsMQlk0OuIzNTA8GgftoTvMgnM7RhArNg98wKMy+noaD5NVAu\nIXcKxSCujnR3BxGLzehPgYKc24Y3+0Dcheo4221Wg8AnnOOAp1bPOQ1kQakpVggl\n7jhnhBuy2HYCJV94ycMyl5V0aBNLytkXcqkC9D52ZV+uMBNKgYpP06+/+QKBgFBf\n1uXJFvw2PHjLFrCgG6vHh7b4euSbo/9Cu/WX386WEik9k5wPcWFjjRwCnwN6eaOw\nrU7Q6pnpTfPhBaz882kyoLRhksM7ytLwBVvpr0Drpzp5qvQL3foYto9HAPA8S7zO\nYGJmixaJ+KUAFZkGCpKdivtHXe3J3fLm5XoVzunFAoGBAJnbBjZqE+kO8iBhfj5a\nTSwoDijFlFbuk6trCr2QAiIZigEfRZoyCbBKV+Bf8aKTdF9gCeMM/4Xn9CRlfAI3\n43Nu1nFMPaFJwtzUdWlyUFpZD+unOcYkx+3wUWG3X8IVYwn5Zk/cnnuqtRtv+E24\nua7rTh2smVmFgz1Tsp5iNsS4\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-t9oz0@navigatex-improvathon.iam.gserviceaccount.com",
+  "client_id": "112511235559778290159",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-t9oz0%40navigatex-improvathon.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
