@@ -28,13 +28,16 @@ const Users = () => {
                 const info = user.split(',')
                 return {
                     email: info[0],
-                    password: info[1],
+                    password: info[2].split(' ')[0],
+                    AID: info[1],
                     display_name: info[2],
-                    isDriver: info[3]
+                    isDriver: info[3],
+                    Address: info[4],
+                    geolocation: info[5]
                 }
             })
             console.log(users)
-            dispatch(IMPORT_USERS)
+            // dispatch(IMPORT_USERS)
         }
         reader.readAsBinaryString(form.file.files[0])
     }
