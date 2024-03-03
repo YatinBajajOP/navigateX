@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GET_USERS } from './UserStore.thunk'
+import { GET_USERS, IMPORT_USERS } from './UserStore.thunk'
 
 
 
@@ -13,6 +13,9 @@ export const UserStore = createSlice({
   extraReducers: (builder) => {
     builder.addCase(GET_USERS.fulfilled, (state, action) => {
       state.users = action.payload
+    })
+    builder.addCase(IMPORT_USERS.fulfilled, (state, action) => {
+      // state.users = action.payload
     })
   },
 })
