@@ -9,8 +9,7 @@ require('dotenv').config();
 app.use(require('cors')())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-
-mongoose.connect('mongodb://localhost:27017/navigateXTest')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
 .catch((err) => console.error('Failed to connect to MongoDB', err));
 
