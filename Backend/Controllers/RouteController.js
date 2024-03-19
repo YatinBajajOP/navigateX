@@ -22,9 +22,26 @@ const createRoute = async (req, res) => {
             if(!user) throw Error(`Employee with id ${employee.id} does not exist`)
         }))
     
-        const newRoute = ROUTES.create(route);
-        return res.json({msg: 'success', data: newRoute._id});
+        const newRoute = ROUTES.create(route)
+        return res.json({msg: 'success', data: newRoute._id})
     } catch (err) {
-        return res.status(400).json({ msg: err.message });
+        return res.status(400).json({ msg: err.message })
     }
+}
+
+const getRouteForUser = async () => {
+    try{
+        const user = USERS.findById(req.user)
+        if(!user) throw Error('Authenticated user doesnot seem to exist, Please try again.')
+
+        const routes = ROUTES.find({status: false})
+        return res.json({msg: 'success', data: routes})
+    } catch(e) {
+        return res.status(400).json({ msg: err.message })
+    }
+}
+
+module.exports = {
+    createRoute,
+    getRouteForUser,
 }

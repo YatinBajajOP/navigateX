@@ -33,6 +33,10 @@ const signUp = async (req, res) => {
     }
 }
 
+const createUsersInBulk = async => {
+    
+}
+
 const logIn = async (req, res) => {
     const { username, password } = req.body
 
@@ -49,6 +53,11 @@ const logIn = async (req, res) => {
     } catch (e) {
         return res.status(400).json({ msg: e.message })
     }
+}
+
+const getUser = async (req, res) => {
+    token = createToken(req.user)
+    return res.json({msg: 'success', data: token})
 }
 
 module.exports = { signUp, logIn }
