@@ -8,4 +8,4 @@ const isAuthenticated = (token) => {
     return jwt.verify(token, process.env.JWT_SECRET_KEY)
 }
 
-module.exports  = { createToken, refreshToken, isAuthenticated }
+module.exports  = { createToken, isAuthenticated }
