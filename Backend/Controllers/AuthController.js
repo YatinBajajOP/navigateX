@@ -60,4 +60,4 @@ const getUser = async (req, res) => {
     return res.json({msg: 'success', data: token})
 }
 
-module.exports = { signUp, logIn }
+module.exports = { signUp, logIn, getUser }
