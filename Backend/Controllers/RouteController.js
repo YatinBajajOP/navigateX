@@ -34,8 +34,41 @@ const getRouteForUser = async () => {
         const user = USERS.findById(req.user)
         if(!user) throw Error('Authenticated user doesnot seem to exist, Please try again.')
 
-        const routes = ROUTES.find({status: false})
+        const routes = ROUTES.find({completed: false})
         return res.json({msg: 'success', data: routes})
+    } catch(e) {
+        return res.status(400).json({ msg: err.message })
+    }
+}
+
+const updateRoute = async (req, res) => {
+    const { id, updates } = req.body
+    try {
+        if(!id) throw Error('Route id is not provided')
+        if(!updates) throw Error('Route updates are not provided')
+        const route = ROUTES.findById(id)
+        if(!route) throw Error(`Route with id ${id} not found`)
+
+        for(let key in updates) {
+            route[key] = updates[key]
+        }
+        route.save()
+    } catch(e) {
+        return res.status(400).json({ msg: err.message })
+    }
+}
+
+const setUserStatusInRoute = async (req, res) => {
+    const { uid, rid, status } = req.body
+    try {
+        const route = ROUTES.findById(rid)
+        if(!route) throw Error(`Route with id ${rid} doesnot exist`)
+        const doesUserExistInRoute = route.employees.filter(employee => employee.id === uid).length
+        if(!doesUserExistInRoute) throw Error(`User with id ${uid} doesnot exist in the route with id ${rid}`)
+        route.employees.forEach(employee => {
+            if(employee.id === uid) employee.status = status
+        })
+        route.save()
     } catch(e) {
         return res.status(400).json({ msg: err.message })
     }
@@ -44,4 +77,6 @@ const getRouteForUser = async () => {
 module.exports = {
     createRoute,
     getRouteForUser,
+    updateRoute,
+    setUserStatusInRoute,
 }

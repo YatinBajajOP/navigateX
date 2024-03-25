@@ -1,3 +1,5 @@
+const LOGS = require('../Models/LogModel')
+
 const createLog = async (req, res) => {
     try{
         const log = req.data
@@ -9,5 +11,16 @@ const createLog = async (req, res) => {
 }
 
 const getFilteredLogs = async (req, res) => {
+    const filter = req.body
+    try{
+        let logs = LOGS.find(filter)
+        return res.json({messsage: 'Success', data: logs})
+    } catch(e) {
+        return res.status(400).json({ msg: err.message })
+    }
+}
 
+module.exports = {
+    createLog, 
+    getFilteredLogs,
 }

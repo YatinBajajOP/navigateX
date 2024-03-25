@@ -32,7 +32,7 @@ const RouteSchema = new mongoose.Schema({
         type: String,
         ref: 'Vehicles'
     },
-    status: {
+    completed: {
         type: Boolean,
         required: true,
     },
