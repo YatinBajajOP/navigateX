@@ -26,7 +26,6 @@ const RouteSchema = new mongoose.Schema({
         status: {
             type: String,
         },
-        required: true,
     },
     v_id: {
         type: String,
