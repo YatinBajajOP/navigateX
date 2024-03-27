@@ -27,7 +27,7 @@ const createUsers = async (req, res) => {
             delete user.password
             user.id = userRef.uid
             user.created_time = Timestamp.fromDate(new Date())
-            user.location = new GeoPoint(parseFloat(user.location.split(',')[0].trim()), parseFloat(user.location.split(',')[1].trim()))
+            if(user.location) user.location = new GeoPoint(parseFloat(user.location.split(',')[0].trim()), parseFloat(user.location.split(',')[1].trim()))
             await USERS.doc(userRef.uid).set(user)
             return userRef.uid
         } catch (e) {
@@ -35,8 +35,7 @@ const createUsers = async (req, res) => {
             console.log(e)
         }
     }))
-    console.log(mapping)
-    res.json({mssg: 'success', data: userRefs})
+    res.json({mssg: 'success', data: {userRefs, mapping}})
 }
 
 const deleteUsers = async (req, res) => {

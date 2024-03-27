@@ -7,10 +7,5 @@ router
     .put(createUser)
     .post(createUsers)
     .delete(deleteUsers)
-    
-// router
-//     .route('/:id')
-//     .get(getMessages)
-//     .post(sendMessage)
 
 module.exports = router
